@@ -19,6 +19,7 @@ class Kernel extends HttpKernel
         \App\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
         \App\Http\Middleware\TrustProxies::class,
+      
     ];
 
     /**
@@ -60,6 +61,11 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        //shinobi middlewares
+        'rol' => \Caffeinated\Shinobi\Middleware\UserHasRole::class,
+        'permiso' => \Caffeinated\Shinobi\Middleware\UserHasPermission::class,
+        //middlewares de reglas de negocio
+        'afterLogin'=> \App\Http\Middleware\AfterLoginMiddleware::class,
     ];
 
     /**

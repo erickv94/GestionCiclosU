@@ -26,18 +26,14 @@
           <div class="form-group {{$errors->has('email')?'has-danger':''}}">
             <label class="control-label">Email</label>
             <input class="form-control {{$errors->has('email')?'is-invalid':''}}" name="email" value="{{ old('email') }}" type="text" placeholder="Email" autofocus>
-            @if($errors->has('email'))
-              <div class="form-control-feedback text-danger">{{$errors->first('email')}}</div>
-            @endif
+            {!! validacion($errors,'email') !!}
           </div>
 
 
           <div class="form-group {{$errors->has('password')?'has-danger':''}}">
             <label class="control-label">Contraseña</label>
             <input class="form-control {{$errors->has('password')?'is-invalid':''}}"  name="password" type="password" placeholder="Contraseña">
-            @if($errors->has('password'))
-              <div class="form-control-feedback text-danger">{{$errors->first('password')}}</div>
-            @endif
+            {!! validacion($errors,'password') !!}
           </div>
           <div class="form-group">
             <div class="utility">

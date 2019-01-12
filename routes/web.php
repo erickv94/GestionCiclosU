@@ -14,7 +14,7 @@
 //raiz de la app
 Route::get('/', function () {
     return view('login');
-});
+})->middleware('afterLogin');
 
 /**
  * Rutas para logica de autenticacion 
@@ -31,5 +31,6 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('passw
 Route::get('/inicio', 'InicioController@index')->name('home');
 
 Route::group(['middleware' => ['auth']], function () {
-    
+    //
+    Route::get('docentes', 'DocenteController@index')->name('docentes.index')->middleware('permiso:docentes.index');
 });
