@@ -11,6 +11,25 @@
 |
 */
 
+//raiz de la app
 Route::get('/', function () {
-    return view('welcome');
+    return view('login');
+});
+
+/**
+ * Rutas para logica de autenticacion 
+ */
+
+//colocar true en caso de activación de registros de usuario
+Auth::routes(['register'=>false,'reset'=>false]);
+
+Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
+Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('password.update');
+
+//envia al dashboard
+Route::get('/inicio', 'InicioController@index')->name('home');
+
+Route::group(['middleware' => ['auth']], function () {
+    
 });
