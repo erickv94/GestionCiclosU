@@ -46,7 +46,7 @@ Planificación de ciclos | Inicio
     <div class="col-md-6 col-lg-3">
       <div class="widget-small primary coloured-icon"><i class="icon fa fa-star fa-3x"></i>
         <div class="info">
-          <h4>Stars</h4>
+          <h4>Locales</h4>
           <p><b>500</b></p>
         </div>
       </div>

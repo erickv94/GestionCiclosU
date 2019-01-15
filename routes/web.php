@@ -19,6 +19,10 @@ Route::get('/', function () {
 /**
  * Rutas para logica de autenticacion 
  */
+Route::get('test', function () {
+        return view('reset');
+});
+
 
 //colocar true en caso de activación de registros de usuario
 Auth::routes(['register'=>false,'reset'=>false]);

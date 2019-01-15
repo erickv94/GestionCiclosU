@@ -19,6 +19,16 @@
       <div class="logo">
         <h3>Sistema de Planificación de ciclos</h3>
       </div>
+
+      @if (session()->has('mensaje'))
+      <div class="alert alert-success text-center animated fadeIn">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+            {{session()->get('mensaje')}}
+      </div>
+      @endif
+
       <div class="login-box">
       <form class="login-form" action="{{route('login')}}" method="POST">
           @csrf
@@ -49,7 +59,7 @@
             <button class="btn btn-primary btn-block"><i class="fa fa-sign-in fa-lg fa-fw"></i>Iniciar sesión</button>
           </div>
         </form>
-      <form class="forget-form" action="{{route('password.email')}}" method="POST">
+      <form  class="forget-form" action="{{route('password.email')}}" method="POST">
         @csrf
           <h4 class="login-head"><i class="fa fa-lg fa-fw fa-lock"></i>Reestablecer contraseña</h3>
           <div class="form-group {{$errors->has('email')?'has-danger':''}}">

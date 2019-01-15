@@ -1,0 +1,14 @@
+{
+    "name": "Planificaci\u00f3n de ciclos",
+    "short_name": "Planificaci\u00f3n de ciclos",
+    "icons": [
+        {
+            "src": "/android-chrome-144x144.png",
+            "sizes": "144x144",
+            "type": "image/png"
+        }
+    ],
+    "theme_color": "#ffffff",
+    "background_color": "#ffffff",
+    "display": "standalone"
+}
