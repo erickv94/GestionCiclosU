@@ -9,12 +9,13 @@ Planificación de ciclos | Inicio
 
 
 @section('breadcrumb')
-<li class="breadcrumb-item"><a href="{{route('home')}}">Panel general</a></li>
+<li class="breadcrumb-item"><a href="{{route('materias.index')}}">Panel general</a></li>
+
 @endsection
 
 @section('info')
-<h1><i class="fa fa-users"></i>Docentes registrados</h1>
-<p>Docentes que han sido registrados en el sistema</p>
+<h1><i class="fa fa-book"></i> Gestión de materias</h1>
+<p>Sección para la gestión de materias de la Facultad de Química y Farmacia UES</p>
 @endsection
 
 @section('contenido')
@@ -25,4 +26,6 @@ Planificación de ciclos | Inicio
 @endsection
 
 @section('js.current')
+
+
 @endsection

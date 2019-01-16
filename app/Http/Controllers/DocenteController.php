@@ -10,6 +10,6 @@ class DocenteController extends Controller
     public function index(){
         $docentes= User::all();
 
-        return view('docente.index',compact(['docentes'=>$docentes]));
+        return view('docentes.index',compact(['docentes'=>$docentes]));
     }
 }

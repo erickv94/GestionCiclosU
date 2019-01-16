@@ -11,30 +11,34 @@
 |
 */
 
+//ruta de test get
+Route::get('test', function () {
+    return view('materia.index');
+});
+
+
 //raiz de la app
 Route::get('/', function () {
     return view('login');
 })->middleware('afterLogin');
 
+Route::get('/inicio', 'InicioController@index')->name('home')->middleware('permiso:index');
+
+
 /**
- * Rutas para logica de autenticacion 
+ * Rutas para logica de autenticacion parametros de usuario
  */
-Route::get('test', function () {
-        return view('reset');
-});
-
-
-//colocar true en caso de activación de registros de usuario
-Auth::routes(['register'=>false,'reset'=>false]);
-
-Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
-Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
-Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('password.update');
+require_once( __DIR__.'/routes-seguridad.php');
 
 //envia al dashboard
-Route::get('/inicio', 'InicioController@index')->name('home');
 
 Route::group(['middleware' => ['auth']], function () {
-    //
-    Route::get('docentes', 'DocenteController@index')->name('docentes.index')->middleware('permiso:docentes.index');
+    //hacer requires si se incorporan nuevos modulos
+    require_once( __DIR__.'/routes-docentes.php');
+    require_once( __DIR__.'/routes-locales.php');
+    require_once( __DIR__.'/routes-materias.php');
+    require_once( __DIR__.'/routes-asistentes.php');
+    
+    
+
 });

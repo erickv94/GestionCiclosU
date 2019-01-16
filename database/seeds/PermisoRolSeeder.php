@@ -1,9 +1,10 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Caffeinated\Shinobi\Models\Role;
 use App\User;
 
-class PermisoUserSeeder extends Seeder
+class PermisoRolSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,11 +13,8 @@ class PermisoUserSeeder extends Seeder
      */
     public function run()
     {
-        //permisos para usuario coordinador
-        
-        //permisos para usuario asistente
+         Role::find(2)->syncPermissions([1,2,]);
+  
 
-
-        
     }
 }
