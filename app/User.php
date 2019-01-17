@@ -30,10 +30,34 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
-
+    /**
+     * Notificaciones remitidas 
+     */
     public function sendPasswordResetNotification($token)
     {
         $this->notify(new ResetPasswordNotification($token));
+    }
+    /**
+     * Relaciones implementadas en el ORM 
+     */
+    public function Docente()
+    {
+        return $this->hasOne('App\Docente');
+    }
+
+    /**
+     * Queries scopes declarados
+     */
+    public function scopeName($query, $name){
+            if ($name) {
+                return $query->where('name','LIKE',"%$name%");
+            }
+    }
+
+    public function scopeEmail($query, $email){
+        if ($email) {
+            return $query->where('name','LIKE',"%$email%");
+        }
     }
 
 }

@@ -66,6 +66,7 @@ class Kernel extends HttpKernel
         'permiso' => \Caffeinated\Shinobi\Middleware\UserHasPermission::class,
         //middlewares de reglas de negocio
         'afterLogin'=> \App\Http\Middleware\AfterLoginMiddleware::class,
+        'verificado'=> \App\Http\Middleware\verificacionMiddleware::class,
     ];
 
     /**

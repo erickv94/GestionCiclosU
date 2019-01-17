@@ -23,7 +23,7 @@ Planificación de ciclos | Inicio
       <div class="widget-small primary coloured-icon"><i class="icon fa fa-users fa-3x"></i>
         <div class="info">
           <h4>Docentes</h4>
-          <p><b></b></p>
+        <p><b>{{$docentes}}</b></p>
         </div>
       </div>
     </div>

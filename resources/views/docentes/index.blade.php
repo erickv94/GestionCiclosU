@@ -18,7 +18,55 @@ Planificación de ciclos | Inicio
 @endsection
 
 @section('contenido')
+<div class="tile">
+            <form class="row" method="GET" action="{{route('docentes.index')}}">
+                <div class="form-group col-sm-3">
+                  <input class="form-control" type="text" placeholder="Buscar por nombre" name='name'>
+                </div>
+                <div class="form-group col-sm-3">
+                  <input class="form-control" type="text" placeholder="Buscar por email" name="email">
+                </div>
+                <div class="form-group col-sm-2">
+                        <label >
+                          <input class="form-control" type="checkbox" name='coordinador'>Solo coordinadores
+                        </label>
+                </div>
+                <div class="form-group col-sm-3 ">
+                        <button class="btn btn-primary" type="submit"><i class="fa fa-search"></i> Buscar</button>
+                <a href="{{route('docentes.index')}}" class="btn btn-primary" ><i class="fa fa-list"></i> Todos</a>
 
+                    </div>
+              </form>
+     <div class="table-responsive">
+      <table class="table" style="text-align: center"> 
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Email</th>
+            <th>coordinador</th>
+            <th>acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+        @foreach ($docentes as $docente)
+            <tr>
+            <td>{{$docente->user->name}}</td>
+            <td>{{$docente->user->email}}</td>
+            <td>{!!($docente->esCoordinador) ?'<i class="fa fa-check" aria-hidden="true"></i>':'<i class="fa fa-close" aria-hidden="true"></i>' !!}</td>
+            <td>
+            <a href="{{route('docentes.show',$docente->id)}}" class="btn btn-outline-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> Mostrar</a>
+                <a href="" class="btn btn-outline-primary btn-sm"><i class="fa fa-pencil" aria-hidden="true"></i> Editar</a>
+                <a href="" class="btn btn-outline-warning btn-sm"><i class="fa fa-lock" aria-hidden="true"></i> Inhabilitar</a>
+
+            </td>
+          </tr>
+        @endforeach
+
+        </tbody>
+      </table>
+      {!! $docentes->links() !!}
+    </div>
+  </div>
 @endsection
 
 @section('js.plugins')
