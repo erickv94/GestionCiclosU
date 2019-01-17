@@ -35,19 +35,26 @@ Planificación de ciclos | Inicio
             <p class="lead">{{$docente->user->email}}</p>
             <h3>Sexo</h3>
             <p class="lead">{{$docente->user->sexo}}</p>
-            <h3>Fecha de creacion</h3>
-            <p class="lead">{{$docente->user->created_at}}</p>
+            <h3>Grado Academico</h3>
+            <p class="lead">{{$docente->gradoAcademico}}</p>
+            <h3>Cordinador</h3>
+            <p class="lead">{!!$docente->esCoordinador?"<i class='fa fa-check text-success' aria-hidden='true'></i> Si":"<i class='fa fa-close text-danger' aria-hidden='true'></i> No"!!}</p>
+
             
           </div>
           <div class="col-lg-6">
-            <div class="bs-component">
-              <h2>Example body text</h2>
-              <p>Nullam quis risus eget <a href="#">urna mollis ornare</a> vel eu leo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id nibh ultricies vehicula.</p>
-              <p><small>This line of text is meant to be treated as fine print.</small></p>
-              <p>The following is <strong>rendered as bold text</strong>.</p>
-              <p>The following is <em>rendered as italicized text</em>.</p>
-              <p>An abbreviation of the word attribute is <abbr title="attribute">attr</abbr>.</p>
-            </div>
+              <h3>Fecha de registro</h3>
+              <p class="lead">{{$docente->user->created_at}}</p>
+              <h3>Ultimo login</h3>
+              <p class="lead">{{$docente->user->lastLogin??'Nunca se ha logeado'}}</p>
+              <h3>Cuenta verificada</h3>
+              <p class="lead">{!!$docente->user->esVerificado?"<i class='fa fa-check text-success' aria-hidden='true'></i> Si":"<i class='fa fa-close text-danger' aria-hidden='true'></i> No"!!}</p>
+            @if ($docente->user->esVerificado)
+              <h3>Fecha de verificación de cuenta</h3>
+              <p class="lead">{{$docente->user->password_creado_en??'No disponible'}}</p>
+                
+           @endif
+
           </div>
 
         </div>

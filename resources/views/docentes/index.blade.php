@@ -9,7 +9,7 @@ Planificación de ciclos | Inicio
 
 
 @section('breadcrumb')
-<li class="breadcrumb-item"><a href="{{route('home')}}">Panel general</a></li>
+<li class="breadcrumb-item"><a href="{{route('docentes.index')}}">Listado docentes</a></li>
 @endsection
 
 @section('info')
@@ -19,22 +19,29 @@ Planificación de ciclos | Inicio
 
 @section('contenido')
 <div class="tile">
-            <form class="row" method="GET" action="{{route('docentes.index')}}">
-                <div class="form-group col-sm-3">
+                <div class="tile-title-w-btn">
+
+                        <div class="btn-group">
+                        <a class="btn btn-primary" href="{{route('docentes.create')}}"><i class="fa fa-lg fa-plus"></i></a>
+                            <a class="btn btn-primary" href="#"><i class="fa fa-lg fa-file"></i></a>
+                        </div>
+                </div>    
+                <form class="row" method="GET" action="{{route('docentes.index')}}">
+                            <div class="form-group col-sm-3">
                   <input class="form-control" type="text" placeholder="Buscar por nombre" name='name'>
                 </div>
                 <div class="form-group col-sm-3">
                   <input class="form-control" type="text" placeholder="Buscar por email" name="email">
                 </div>
-                <div class="form-group col-sm-2">
+                <div class="form-group col-sm-3">
                         <label >
-                          <input class="form-control" type="checkbox" name='coordinador'>Solo coordinadores
+                          <input class="form-control" type="checkbox" name='coordinador'>Coordinadores
                         </label>
                 </div>
                 <div class="form-group col-sm-3 ">
                         <button class="btn btn-primary" type="submit"><i class="fa fa-search"></i> Buscar</button>
-                <a href="{{route('docentes.index')}}" class="btn btn-primary" ><i class="fa fa-list"></i> Todos</a>
-
+                        <a href="{{route('docentes.index')}}" class="btn btn-primary" ><i class="fa fa-list"></i> Todos</a>
+                        
                     </div>
               </form>
      <div class="table-responsive">

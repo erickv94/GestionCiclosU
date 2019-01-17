@@ -32,5 +32,8 @@ class DocenteController extends Controller
         return view('docentes.show',compact('docente'));
     }
 
-
+    public function create()
+    {
+        return view('docentes.create');
+    }
 }

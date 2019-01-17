@@ -17,6 +17,7 @@ class UserSeeder extends Seeder
         User::create([
             'name'=>'Erick Ventura',
             'esVerificado'=>true,
+            'sexo'=>'Masculino',
             'codigoVerificacion'=>str_random(25),
             'email'=>'admin@example.com',
             'password'=>bcrypt('admin'),
@@ -25,6 +26,7 @@ class UserSeeder extends Seeder
         User::create([
             'name'=>'Zoila Yaneth',
             'esVerificado'=>true,
+            'sexo'=>'Femenino',
             'codigoVerificacion'=>str_random(25),
             'email'=>'docente1@example.com',
             'password'=>bcrypt('docente'),
@@ -36,6 +38,7 @@ class UserSeeder extends Seeder
         User::create([
             'name'=>'Samantha X',
             'codigoVerificacion'=>str_random(25),
+            'sexo'=>'Femenino',
             'email'=>'docente2@example.com',
             'password'=>bcrypt('docente'),
         ]);
@@ -47,6 +50,7 @@ class UserSeeder extends Seeder
         User::create([
             'name'=>'Eduardo X',
             'codigoVerificacion'=>str_random(25),
+            'sexo'=>'Masculino',
             'email'=>'asistente@example.com',
             'password'=>bcrypt('asistente'),
         ]);
