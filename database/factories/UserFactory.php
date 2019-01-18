@@ -19,13 +19,13 @@ $factory->define(App\User::class, function (Faker $faker){
 
     return [
         'name' => $faker->name,
-        'email' => $faker->unique()->safeEmail,
+        'email' => $faker->unique()->word."@ues.edu.sv",
         'password' => '$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm', // secret
         'remember_token' => str_random(10),
         'sexo'=>rand(0,1)?'Masculino':'Femenino',
         'esVerificado'=>true,
         'codigoVerificacion'=>str_random(25),
-        'created_at'=> Carbon::now()->addDays(rand(1,100)),
+        'created_at'=> Carbon::now()->subDays(rand(1,100)),
             
             
     ];

@@ -17,6 +17,7 @@ class CreateDocentesTable extends Migration
             $table->increments('id');
             $table->boolean('esCoordinador')->default(0);
             $table->string('gradoAcademico',50)->default('docente');
+            $table->timestamps();
             $table->unsignedInteger('user_id')->unique();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });

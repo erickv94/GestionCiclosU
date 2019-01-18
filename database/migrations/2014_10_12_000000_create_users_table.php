@@ -20,6 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('codigoVerificacion',25);
             $table->enum('sexo',['Masculino','Femenino']);
             $table->boolean('esVerificado')->default(0);
+            $table->boolean('habilitado')->default(1);
             $table->timestamp('password_creado_en')->nullable();
             $table->timestamp('password_actualizado_en')->nullable();	
             $table->timestamp('lastLogin')->nullable();	

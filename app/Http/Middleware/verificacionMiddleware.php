@@ -18,13 +18,24 @@ class verificacionMiddleware
     public function handle($request, Closure $next)
     {   
        $user= User::where('email',$request->email)->first();
+      if($user)
+      {  
         if($user->esVerificado){
-  
-            return $next($request);
+            if($user->habilitado)
+                return $next($request);
+            else 
+                return back()->with('mensaje','Su usuario ha sido inhabilitado del sistema');
         }
-        else{
+        else
+        {
 
         return redirect()->route('login')->with('mensaje','Necesita Validar email, para autenticarse');
         }
-    }
+
+      }
+      else
+      {
+        return $next($request);
+      }
+   }
 }

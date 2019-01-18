@@ -22,6 +22,9 @@ class EventServiceProvider extends ServiceProvider
         'Illuminate\Auth\Events\Login' => [
             'App\Listeners\SuccessfulLogin',
         ],
+        'App\Events\CreateUser' => [
+            'App\Listeners\SendCodigoVerificacion',
+        ]
     ];
 
     /**
