@@ -51,7 +51,7 @@ Planificación de ciclos | Inicio
               <p class="lead">{!!$docente->user->esVerificado?"<i class='fa fa-check text-success' aria-hidden='true'></i> Si":"<i class='fa fa-close text-danger' aria-hidden='true'></i> No"!!}</p>
             @if ($docente->user->esVerificado)
               <h3>Fecha de verificación de cuenta</h3>
-              <p class="lead">{{$docente->user->password_creado_en??'No disponible'}}</p>
+              <p class="lead">{{$docente->user->password_creado_en??'No se ha verificado'}}</p>
                 
            @endif
 

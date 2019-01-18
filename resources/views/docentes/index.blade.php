@@ -106,7 +106,7 @@
 
 function confirmar(nombre,id){
     swal({
-      title: "Estas seguro de eliminar"+nombre+"?",
+      title: "Estas seguro de eliminar "+nombre+"?",
       text: "Una vez borrado no podras recuperar el registro",
       type: "warning",
       showCancelButton: true,
@@ -116,7 +116,7 @@ function confirmar(nombre,id){
       closeOnCancel: false
     }, function(isConfirm) {
       if (isConfirm) {
-        swal("Borrado!", "Usuario ha sido borrado con exito.", "success");
+        swal("Borrado!", "Docente ha sido borrado con exito.", "success");
         document.getElementById('delete-'+id).submit();
       } else {
         swal("Cancelado!", "No se ha elimando nada:)", "error");
