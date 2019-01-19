@@ -35,7 +35,7 @@ class MateriaController extends Controller
       
          Materia::create($request->all());
         
-        return back()->with('mensaje','Local almacenado correctamente');
+        return back()->with('mensaje','Materia almacenado correctamente');
     }
 
     public function edit($id){
