@@ -21,7 +21,7 @@ Planificación de ciclos | Inicio
 
 @section('contenido')
 <div class="tile">
-    @include('locales.partials.edit');
+    @include('locales.partials.edit')
 </div>
 @endsection
 

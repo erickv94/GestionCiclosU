@@ -21,7 +21,7 @@ Planificación de ciclos | Gestión docentes
 
 @section('contenido')
 <div class="tile">
-    @include('docentes.partials.edit');
+    @include('docentes.partials.edit')
 </div>
 @endsection
 

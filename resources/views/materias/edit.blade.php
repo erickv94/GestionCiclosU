@@ -9,19 +9,19 @@ Planificación de ciclos | Inicio
 
 
 @section('breadcrumb')
-<li class="breadcrumb-item"><a href="{{route('docentes.index')}}">Listado Docentes</a></li>
-<li class="breadcrumb-item"><a href="{{route('docentes.create')}}">Registrar Docente</a></li>
+<li class="breadcrumb-item"><a href="{{route('materias.index')}}">Listado Materias</a></li>
+<li class="breadcrumb-item"><a href="{{route('materias.edit',$materia->id)}}">EditaMateria</a></li>
 
 @endsection
 
 @section('info')
-<h1><i class="fa fa-plus"></i> Registrar docente</h1>
-<p>Registro de docente en el sistema</p>
+<h1><i class="fa fa-plus"></i> Editar materia</h1>
+<p>Actualizacion de materia en el sistema</p>
 @endsection
 
 @section('contenido')
 <div class="tile">
-    @include('docentes.partials.crear')
+    @include('materias.partials.edit')
 </div>
 @endsection
 
