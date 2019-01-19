@@ -19,7 +19,7 @@
             <div class="form-group row">
               <label class="control-label col-md-3">Nivel Academico</label>
               <div class="col-md-8">
-                    <input class="form-control col-md-8 {{$errors->has('gradoAcademico')?'is-invalid':''}}" type='text' name="gradoAcademico" placeholder="Ingresar titulo academico" value="{{ old('gradoAcademico')}}">
+                    <input class="form-control col-md-8 {{$errors->has('gradoAcademico')?'is-invalid':''}}" type='text' name="gradoAcademico" placeholder="Ingresar titulo academico (opcional)" value="{{ old('gradoAcademico')}}">
                     {!! validacion($errors,'gradoAcademico') !!}
                 </div>
             </div>

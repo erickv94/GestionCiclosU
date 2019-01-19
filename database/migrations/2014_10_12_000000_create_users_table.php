@@ -17,7 +17,7 @@ class CreateUsersTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('email')->unique();
-            $table->string('codigoVerificacion',25);
+            $table->string('codigoVerificacion',25)->nullable();
             $table->enum('sexo',['Masculino','Femenino']);
             $table->boolean('esVerificado')->default(0);
             $table->boolean('habilitado')->default(1);

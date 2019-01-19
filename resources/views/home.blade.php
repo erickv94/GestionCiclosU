@@ -39,15 +39,15 @@ Planificación de ciclos | Inicio
       <div class="widget-small info coloured-icon"><i class="icon fa fa-book fa-3x"></i>
         <div class="info">
           <h4>Materias</h4>
-          <p><b>10</b></p>
+          <p><b>{{$materias}}</b></p>
         </div>
       </div>
     </div>
     <div class="col-md-6 col-lg-3">
-      <div class="widget-small primary coloured-icon"><i class="icon fa fa-star fa-3x"></i>
+      <div class="widget-small primary coloured-icon"><i class="icon fa fa-building fa-3x"></i>
         <div class="info">
           <h4>Locales</h4>
-          <p><b>500</b></p>
+          <p><b>{{$locales}}</b></p>
         </div>
       </div>
     </div>

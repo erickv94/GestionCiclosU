@@ -13,14 +13,14 @@
     <div class="form-group row">
       <label class="control-label col-md-3">Codigo</label>
       <div class="col-md-8">
-        <input class="form-control col-md-8 {{$errors->has('codigo')?'is-invalid':''}}" type="email" name='codigo' placeholder="Ingresar codigo del local" value="{{ old('codigo')??$local->codigo}}">
+        <input class="form-control col-md-8 {{$errors->has('codigo')?'is-invalid':''}}" type="email" name='codigo' placeholder="Ingresar codigo del local (opcional)" value="{{ old('codigo')??$local->codigo}}">
         {!! validacion($errors,'codigo') !!}
       </div>
     </div>
     <div class="form-group row">
       <label class="control-label col-md-3">Tipo Local</label>
       <div class="col-md-8">
-            <input class="form-control col-md-8 {{$errors->has('tipo')?'is-invalid':''}}" type='text' name="tipo" placeholder="Ingresar titulo academico" value="{{ old('tipo')??$local->tipo}}">
+            <input class="form-control col-md-8 {{$errors->has('tipo')?'is-invalid':''}}" type='text' name="tipo" placeholder="Ingresar titulo academico (opcional)" value="{{ old('tipo')??$local->tipo}}">
             {!! validacion($errors,'tipo') !!}
         </div>
     </div>

@@ -52,13 +52,13 @@ class DocenteController extends Controller
         $user->save();
 
         $docente=new Docente();
-        $docente->gradoAcademico=$request->gradoAcademico;
+        $docente->gradoAcademico=$request->gradoAcademico??'Docente';
         $docente->user()->associate($user);
         $docente->save();
         
         event(new CreateUser($user));
 
-        return back()->with('mensaje','docente almacenado correctamente');
+        return back()->with('mensaje','docente almacenado correctamente, se envio email de validacion');
     }
 
     public function edit($id){

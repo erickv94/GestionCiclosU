@@ -26,6 +26,7 @@ Route::get('test', function () {
 Route::get('/', function () {
     return view('login');
 })->middleware('afterLogin');
+//middleware afterLogin se encarga de evitar redireccion al raiz '/' login y redirreciona a el dashboar /inicio 
 
 
 Route::get('/inicio', 'InicioController@index')->name('home')->middleware('permiso:index');
