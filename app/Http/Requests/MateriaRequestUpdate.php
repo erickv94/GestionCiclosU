@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class MateriaRequestUpdate extends FormRequest
 {
@@ -41,7 +42,17 @@ class MateriaRequestUpdate extends FormRequest
                 'max:255',
                 'string',
                 
-            ]
+            ],
+            'ciclo'=>
+            [
+                'required',
+                Rule::in(['Impar','Par','Ambos'])
+            ],
+            'nivel'=>
+            [
+                'required',
+                Rule::in([1,2,3,4,5])
+            ],
         ];
     }
 }

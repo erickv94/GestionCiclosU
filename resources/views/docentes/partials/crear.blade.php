@@ -23,23 +23,42 @@
                     {!! validacion($errors,'gradoAcademico') !!}
                 </div>
             </div>
+
             <div class="form-group row">
               <label class="control-label col-md-3">Sexo</label>
               <div class="col-md-9">
                 <div class="form-check">
                   <label class="form-radio-label">
-                    <input class="form-check-input" type="radio" name="sexo" checked value='Masculino'> Masculino
+                    <input class="form-check-input" type="radio" name="sexo" {{old('sexo')==='Masculino'?'checked':''}} value='Masculino'> Masculino
                   </label>
                 </div>
                 <div class="form-check">
                   <label class="form-check-label">
-                    <input class="form-check-input" type="radio" name="sexo" value="Femenino">Femenino
+                    <input class="form-check-input" type="radio" name="sexo" {{old('sexo')=='Femenino'?'checked':''}}  value="Femenino">Femenino
                   </label>
                 </div>
                 {!! validacion($errors,'sexo') !!}
               </div>
             </div>
 
+            <div class="form-group row">
+                <label  class='control-label col-md-3' for="exampleSelect1">Materias impartidas</label>
+                <div class="col-md-8">
+                <select class="form-control col-md-10" id="select" multiple name='materias[]'>
+                    <option></option>
+                    @foreach ($materias as $materia)
+                    <option value="{{$materia->id}}" 
+                    {{
+                      (collect(old('materias'))->contains($materia->id)) ? 'selected':'' 
+                    }}
+                    >
+                      {{$materia->codigo.' - '.$materia->nombre}}
+                    </option>
+                    @endforeach                  
+                </select>
+                </div>
+                {!!validacion($errors,'materias')!!}
+              </div>
 
           </form>
         </div>

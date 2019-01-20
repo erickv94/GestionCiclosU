@@ -10,6 +10,7 @@ use Illuminate\Foundation\Console\Presets\React;
 use App\Http\Requests\DocenteRequest;
 use App\Events\CreateUser;
 use App\Http\Requests\DocenteRequestUpdate;
+use App\Materia;
 
 class DocenteController extends Controller
 {
@@ -39,7 +40,9 @@ class DocenteController extends Controller
 
     public function create()
     {
-        return view('docentes.create');
+        $materias=Materia::orderBy('nivel','ASC')->get();
+
+        return view('docentes.create',compact('materias'));
     }
 
     public function store(DocenteRequest $request){
@@ -50,12 +53,18 @@ class DocenteController extends Controller
         $user->sexo=$request->sexo;
         $user->codigoVerificacion=str_random(25);
         $user->save();
-
+        //se asigna el rol docente
+        $user->assignRole(4);
+        //se crea instancia docente
         $docente=new Docente();
         $docente->gradoAcademico=$request->gradoAcademico??'Docente';
+        //asociacion de belongs to user
         $docente->user()->associate($user);
         $docente->save();
-        
+        //hace append de materias
+        $docente->materias()->sync($request->materias);
+
+
         event(new CreateUser($user));
 
         return back()->with('mensaje','docente almacenado correctamente, se envio email de validacion');
@@ -63,7 +72,8 @@ class DocenteController extends Controller
 
     public function edit($id){
             $docente= Docente::findOrFail($id);
-            return view('docentes.edit',compact('docente'));
+            $materias= Materia::orderBy('nivel','ASC')->get();
+            return view('docentes.edit',compact('docente','materias'));
     }
 
     public function update(DocenteRequestUpdate $request, $id){
@@ -72,6 +82,7 @@ class DocenteController extends Controller
         $docente->user->name=$request->name;
         $docente->user->email=$request->email;
         $docente->user->sexo=$request->sexo;
+        $docente->materias()->sync($request->materias);
         $docente->user->push();
         return back()->with('mensaje','Docente '.$docente->user->name.' ha sido actualizado con exito');
     }

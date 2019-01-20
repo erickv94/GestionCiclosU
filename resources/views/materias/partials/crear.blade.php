@@ -19,14 +19,38 @@
     <div class="form-group row">
       <label class="control-label col-md-3">Descripción</label>
       <div class="col-md-8">
-            <textarea rows="5" class="form-control col-md-8 {{$errors->has('descripcion')?'is-invalid':''}}" type='text' name="descripcion" placeholder="Ingresar descripción (opcional)" value="{{old('descripcion')}}">
-            </textarea>
+            <textarea rows="5" class="form-control col-md-8 {{$errors->has('descripcion')?'is-invalid':''}}" type='text' name="descripcion" placeholder="Ingresar descripción (opcional)" value="{{old('descripcion')}}"></textarea>
+           
               {!! validacion($errors,'descripcion') !!}
         </div>
     </div>
 
-
-
+    <div class="form-group row">
+      <label class="control-label col-md-3">Ciclo</label>
+      <div class="col-md-8">
+        <select class="form-control col-md-6 {{$errors->has('ciclo')?'is-invalid':''}}" id="select" name='ciclo'>
+          <option value >Seleccionar ciclo academico</option>
+          <option value="Ambos" {{old('ciclo')?'selected':''}}>Ambos</option>
+          <option value="Impar" {{old('ciclo')?'selected':''}}>Impar</option>
+          <option value="Par" {{old('ciclo')?'selected':''}}>Par</option>
+        </select>
+        {!! validacion($errors,'ciclo') !!}
+      </div>
+    </div>
+    <div class="form-group row">
+        <label class="control-label col-md-3">Seleccionar nivel academico</label>
+        <div class="col-md-8">
+          <select class="form-control col-md-6 {{$errors->has('nivel')?'is-invalid':''}}" id="select" name='nivel'>
+            <option value >Seleccionar nivel academico</option>
+            <option value="1" {{old('nivel')==1?'selected':''}} >Primer año</option>
+            <option value="2" {{old('nivel')==2?'selected':''}}>Segundo año</option>
+            <option value="3" {{old('nivel')==3?'selected':''}}>Tercer año</option>
+            <option value="4" {{old('nivel')==4?'selected':''}}>Cuarto año</option>
+            <option value="5" {{old('nivel')==5?'selected':''}}>Quinto año</option>
+          </select>
+          {!! validacion($errors,'nivel') !!}
+        </div>
+      </div>
   </form>
 </div>
 <div class="tile-footer">

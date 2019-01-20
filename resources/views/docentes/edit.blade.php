@@ -26,9 +26,13 @@ Planificación de ciclos | Gestión docentes
 @endsection
 
 @section('js.plugins')
+<script type="text/javascript" src="/js/plugins/select2.min.js"></script>
 @endsection
 
 @section('js.current')
-
-
+<script>
+        $(document).ready(function(){$('#select').select2({
+            width:'resolve'
+        });} );
+       </script>
 @endsection

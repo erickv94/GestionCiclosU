@@ -13,10 +13,12 @@ class MateriaController extends Controller
 
         $nombre=$request->nombre;
         $codigo=$request->codigo;
-        
+        $ciclo=$request->ciclo;
+        $nivel=$request->nivel;
 
         $materias=Materia::orderBy('created_at','DESC')
-        ->nombre($nombre)->codigo($codigo)->paginate(10);
+        ->nombre($nombre)->codigo($codigo)
+        ->ciclo($ciclo)->nivel($nivel)->paginate(10);
         
         return view('materias.index',compact(['materias']))->withInput($request);
     }
@@ -48,7 +50,10 @@ class MateriaController extends Controller
 
         $materia->nombre=$request->nombre;
         $materia->codigo=$request->codigo;
+        $materia->ciclo=$request->ciclo;
+        $materia->nivel=$request->nivel;
         $materia->descripcion=$request->descripcion;
+        
         $materia->update();
         return back()->with('mensaje','Materia '.$materia->nombre.' ha sido actualizado con exito');
     }

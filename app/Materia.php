@@ -6,10 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Materia extends Model
 {
-    protected $fillable=['nombre','codigo','descripcion'];
+    protected $fillable=['nombre','codigo','descripcion','ciclo'];
     
     //relaciones
-    
+    public function docentes(){
+        return $this->belongsToMany('App\Docente','docentes_materias');
+    }
     //scoopes
     public function scopeNombre($query,$nombre)
     {
@@ -20,5 +22,19 @@ class Materia extends Model
     {
         if($codigo)
             return $query->where('codigo','LIKE',"%$codigo%");
+    }
+
+    public function scopeCiclo($query,$ciclo)
+    {
+        if($ciclo)
+            return $query->where('ciclo',$ciclo);
+    
+    }
+
+    public function scopeNivel($query,$nivel)
+    {
+        if($nivel)
+            return $query->where('nivel',$nivel);
+    
     }
 }

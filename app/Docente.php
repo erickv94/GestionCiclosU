@@ -12,6 +12,9 @@ class Docente extends Model
         return $this->belongsTo('App\User');
     }
 
+    public function materias(){
+        return $this->belongsToMany('App\Materia','docentes_materias');
+    }
     //scropes
 public function scopeEsCoordinador($query, $isTrue){
 

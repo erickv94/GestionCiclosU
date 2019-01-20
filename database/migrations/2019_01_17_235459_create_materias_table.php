@@ -19,6 +19,8 @@ class CreateMateriasTable extends Migration
             $table->string('nombre',50);
             $table->boolean('habilitado')->default(1);
             $table->string('descripcion')->nullable();
+            $table->enum('ciclo',['Impar','Par','Ambos']);
+            $table->enum('nivel',[1,2,3,4,5]);
             $table->timestamps();
         });
     }

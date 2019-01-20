@@ -28,5 +28,10 @@ class RolSeeder extends Seeder
             'slug'=>'asistente',
             'description'=>'Ejerce tareas especificas de asistencia en el sistema',
         ]);
+        Role::create([
+            'name'=>'Docente de la Facultad',
+            'slug'=>'docente',
+            'description'=>'Ejerce tareas especificas de asistencia en el sistema',
+        ]);
     }
 }

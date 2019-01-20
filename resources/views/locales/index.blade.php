@@ -27,8 +27,7 @@ display:inline;
         <div class="tile-title-w-btn">
 
               <div class="btn-group">
-                  <a class="btn btn-primary" href="{{route('locales.create')}}"><i class="fa fa-lg fa-plus"></i></a>
-                  <a class="btn btn-primary" href="#"><i class="fa fa-lg fa-file"></i></a>
+                  <a class="btn btn-primary" href="{{route('locales.create')}}"><i class="fa fa-lg fa-plus"></i> Crear</a>
               </div>
               </div>    
               <form class="row" method="GET" action="{{route('locales.index')}}">

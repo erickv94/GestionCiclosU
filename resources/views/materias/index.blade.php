@@ -27,8 +27,8 @@ display:inline;
         <div class="tile-title-w-btn">
 
               <div class="btn-group">
-                  <a class="btn btn-primary" href="{{route('materias.create')}}"><i class="fa fa-lg fa-plus"></i></a>
-                  <a class="btn btn-primary" href="#"><i class="fa fa-lg fa-file"></i></a>
+                  <a class="btn btn-primary" href="{{route('materias.create')}}"><i class="fa fa-lg fa-plus"></i> Crear</a>
+                 
               </div>
               </div>    
               <form class="row" method="GET" action="{{route('materias.index')}}">
@@ -38,7 +38,24 @@ display:inline;
               <div class="form-group col-sm-3">
                 <input class="form-control" type="text" placeholder="Buscar por codigo" name="codigo" value="{{old('codigo')}}">
               </div>
-
+              <div class="form-group col-sm-3">
+                <select class="form-control" id="select" name='ciclo'>
+                  <option value >Buscar por ciclo</option>
+                  <option value="Ambos">Ambos</option>
+                  <option value="Impar">Impar</option>
+                  <option value="Par">Par</option>
+                </select>
+              </div>
+              <div class="form-group col-sm-3">
+                <select class="form-control" id="select" name='nivel'>
+                  <option value >Buscar por año</option>
+                  <option value="1">Primero</option>
+                  <option value="2">Segundo</option>
+                  <option value="3">Tercero</option>
+                  <option value="4">Cuarto</option>
+                  <option value="5">Quinto</option>
+                </select>
+              </div>
               <div class="form-group col-sm-3 ">
                       <button class="btn btn-primary" type="submit"><i class="fa fa-search"></i> Buscar</button>
                       <a href="{{route('materias.index')}}" class="btn btn-primary" ><i class="fa fa-list"></i> Todos</a>
@@ -51,6 +68,8 @@ display:inline;
         <tr>
           <th>Nombre</th>
           <th>Codigo</th>
+          <th>Ciclo</th>
+          <th>Nivel</th>
           <th>Acciones</th>
         </tr>
       </thead>
@@ -59,7 +78,27 @@ display:inline;
           <tr>
           <td>{{$materia->nombre}}</td>
           <td>{!!$materia->codigo??'<i class="fa fa-info-circle text-primary" aria-hidden="true"></i> No Registrado
-            '!!}</td>
+            '!!}
+          </td>
+          <td>{{$materia->ciclo}}</td>
+          <td>
+          @switch($materia->nivel)
+              @case(1)
+              primer año
+                  @break
+              @case(2)
+              primer año
+                  @break
+              @case(3)
+              Tercer año
+                  @break
+              @case(4)
+              cuarto año
+                @break
+              @case(5)
+                Quinto año
+              @break              
+          @endswitch</td>
           <td>
           <a href="{{route('materias.show',$materia->id)}}" class="btn btn-outline-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> Mostrar</a>
           <a href="{{route('materias.edit',$materia->id)}}" class="btn btn-outline-primary btn-sm"><i class="fa fa-pencil" aria-hidden="true"></i> Editar</a>

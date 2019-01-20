@@ -52,7 +52,11 @@ class DocenteRequest extends FormRequest
                 'regex:/^([a-zA-ZñÑáéíóúÁÉÍÓÚ])+((\s*)+([a-zA-ZñÑáéíóúÁÉÍÓÚ\.]*)*)+$/',
                 'max:50',
                 'min:4'
-                ]
+            ],
+            'materias'=>[
+                'nullable',
+                'max:4'
+            ]
         ];
     }
 }

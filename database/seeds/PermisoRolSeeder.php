@@ -14,7 +14,7 @@ class PermisoRolSeeder extends Seeder
     public function run()
     {
          Role::find(2)->syncPermissions([1,2,]);
-  
+         Role::find(4)->syncPermissions([1]);
 
     }
 }
