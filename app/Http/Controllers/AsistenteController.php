@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Http\Requests\AsistenteRequest;
+use App\Http\Requests\AsistenteRequestUpdate;
+use App\Events\CreateUser;
+
 class AsistenteController extends Controller
 {   
     public function index(Request $request){
@@ -28,7 +32,7 @@ class AsistenteController extends Controller
         return view('asistentes.create');
     }
 
-    public function store(DocenteRequest $request){
+    public function store(AsistenteRequest $request){
 
         $user= new User();
         $user->name=$request->name;
@@ -38,36 +42,25 @@ class AsistenteController extends Controller
         $user->save();
         //se asigna el rol docente
         $user->assignRole(4);
-        //se crea instancia docente
-        $docente=new Docente();
-        $docente->gradoAcademico=$request->gradoAcademico??'Docente';
-        //asociacion de belongs to user
-        $docente->user()->associate($user);
-        $docente->save();
-        //hace append de materias
-        $docente->materias()->sync($request->materias);
-
 
         event(new CreateUser($user));
 
-        return back()->with('mensaje','docente almacenado correctamente, se envio email de validacion');
+        return back()->with('mensaje','Asistente almacenado correctamente, se envio email de validacion');
     }
 
     public function edit($id){
-            $docente= Docente::findOrFail($id);
-            $materias= Materia::orderBy('nivel','ASC')->get();
-            return view('docentes.edit',compact('docente','materias'));
+            $asistente= User::asistentes()->findOrFail($id);
+            return view('asistentes.edit',compact('asistente'));
     }
 
-    public function update(DocenteRequestUpdate $request, $id){
-        $docente=Docente::findOrFail($id);
-        $docente->gradoAcademico=$request->gradoAcademico;
-        $docente->user->name=$request->name;
-        $docente->user->email=$request->email;
-        $docente->user->sexo=$request->sexo;
-        $docente->materias()->sync($request->materias);
-        $docente->user->push();
-        return back()->with('mensaje','Docente '.$docente->user->name.' ha sido actualizado con exito');
+    public function update(AsistenteRequestUpdate $request, $id){
+        $asistente=User::asistentes()->findOrFail($id);
+        $asistente->name=$request->name;
+        $asistente->email=$request->email;
+        $asistente->sexo=$request->sexo;
+        
+        $asistente->update();
+        return back()->with('mensaje','Asistente '.$asistente->name.' ha sido actualizado con exito');
     }
 
     public function inhabilitar($id)

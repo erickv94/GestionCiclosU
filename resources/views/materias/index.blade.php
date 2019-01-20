@@ -84,19 +84,19 @@ display:inline;
           <td>
           @switch($materia->nivel)
               @case(1)
-              primer año
+              Primer año
                   @break
               @case(2)
-              primer año
+              Segundo año
                   @break
               @case(3)
               Tercer año
                   @break
               @case(4)
-              cuarto año
+              Cuarto año
                 @break
               @case(5)
-                Quinto año
+              Quinto año
               @break              
           @endswitch</td>
           <td>

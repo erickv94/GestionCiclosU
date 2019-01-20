@@ -13,7 +13,11 @@ class PermisoRolSeeder extends Seeder
      */
     public function run()
     {
+        /*
+        ROL 1- admin 2-docente 3-coordinador 4-Asistente
+        */
          Role::find(2)->syncPermissions([1,2,]);
+         Role::find(3)->syncPermissions([1]);
          Role::find(4)->syncPermissions([1]);
 
     }

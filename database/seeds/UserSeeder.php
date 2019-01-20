@@ -35,8 +35,9 @@ class UserSeeder extends Seeder
             'esCoordinador'=>true,
             'user_id'=>2
             ]);
+        
         User::create([
-            'name'=>'Samantha X',
+            'name'=>'Samantha Docente',
             'codigoVerificacion'=>str_random(25),
             'sexo'=>'Femenino',
             'email'=>'docente2@example.com',
@@ -48,21 +49,25 @@ class UserSeeder extends Seeder
             ]);
 
         User::create([
-            'name'=>'Eduardo X',
+            'name'=>'Eduardo Asistente',
             'codigoVerificacion'=>str_random(25),
             'sexo'=>'Masculino',
             'email'=>'asistente@example.com',
             'password'=>bcrypt('asistente'),
         ]);
 
-
-    factory(App\User::class, 100)->create();
-
-    for ($i=5; $i <=104 ; $i++) { 
-        Docente::create([
-            'user_id'=>$i,
-            ]);
-    }
+        //docentes mas
+    factory(App\User::class, 20)->create()->each(function($user){
+        
+        $user->docente()->save(new Docente());
+        $user->assignRole(2);
+    });
+    //3 asistentes mas 
+    factory(App\User::class, 3)->create()->each(function($user){
+        
+        $user->assignRole(4);
+    });
+    
 
     }
 }

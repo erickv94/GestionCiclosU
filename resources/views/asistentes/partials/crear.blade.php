@@ -1,6 +1,6 @@
-        <h3 class="tile-title">Registrar datos de docente</h3>
+        <h3 class="tile-title">Registrar datos de asistente</h3>
         <div class="tile-body">
-        <form class="form-horizontal" id="crear" action="{{route('docentes.store')}}" method="POST">
+        <form class="form-horizontal" id="crear" action="{{route('asistentes.store')}}" method="POST">
             <div class="form-group row">
               @csrf
               <label class="control-label col-md-3">Nombre</label>
@@ -16,13 +16,7 @@
                 {!! validacion($errors,'email') !!}
               </div>
             </div>
-            <div class="form-group row">
-              <label class="control-label col-md-3">Nivel Academico</label>
-              <div class="col-md-8">
-                    <input class="form-control col-md-8 {{$errors->has('gradoAcademico')?'is-invalid':''}}" type='text' name="gradoAcademico" placeholder="Ingresar titulo academico (opcional)" value="{{ old('gradoAcademico')}}">
-                    {!! validacion($errors,'gradoAcademico') !!}
-                </div>
-            </div>
+
 
             <div class="form-group row">
               <label class="control-label col-md-3">Sexo</label>
@@ -41,24 +35,7 @@
               </div>
             </div>
 
-            <div class="form-group row">
-                <label  class='control-label col-md-3' for="exampleSelect1">Materias impartidas</label>
-                <div class="col-md-8">
-                <select class="form-control col-md-10" id="select" multiple name='materias[]'>
-                    <option></option>
-                    @foreach ($materias as $materia)
-                    <option value="{{$materia->id}}" 
-                    {{
-                      (collect(old('materias'))->contains($materia->id)) ? 'selected':'' 
-                    }}
-                    >
-                      {{$materia->codigo.' - '.$materia->nombre}}
-                    </option>
-                    @endforeach                  
-                </select>
-                </div>
-                {!!validacion($errors,'materias')!!}
-              </div>
+
 
           </form>
         </div>

@@ -30,7 +30,7 @@ class DocenteRequest extends FormRequest
                 'string',
                 'min:10',
                 'max:255',
-                'regex:/^([a-zA-ZñÑáéíóúÁÉÍÓÚ])+((\s*)+([a-zA-ZñÑáéíóúÁÉÍÓÚ]*)*)+$/'
+                'regex:/^([a-zA-ZñÑáéíóúÁÉÍÓÚ])+((\s*)+([a-zA-ZñÑáéíóúÁÉÍÓÚ\.]*)*)+$/'
             ],
             'email'=>[
                 'required',

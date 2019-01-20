@@ -19,6 +19,11 @@ class RolSeeder extends Seeder
             'special'=>'all-access'        
         ]);
         Role::create([
+            'name'=>'Docente de la Facultad',
+            'slug'=>'docente',
+            'description'=>'Ejerce tareas especificas de asistencia en el sistema',
+        ]);
+        Role::create([
             'name'=>'Coordinador(a) de materia',
             'slug'=>'coordinador',
             'description'=>'Ejerce la coordinacion de materia especifica en el sistema',
@@ -28,10 +33,6 @@ class RolSeeder extends Seeder
             'slug'=>'asistente',
             'description'=>'Ejerce tareas especificas de asistencia en el sistema',
         ]);
-        Role::create([
-            'name'=>'Docente de la Facultad',
-            'slug'=>'docente',
-            'description'=>'Ejerce tareas especificas de asistencia en el sistema',
-        ]);
+
     }
 }

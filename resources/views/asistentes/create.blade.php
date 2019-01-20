@@ -9,31 +9,24 @@ Planificación de ciclos | Inicio
 
 
 @section('breadcrumb')
-<li class="breadcrumb-item"><a href="{{route('docentes.index')}}">Listado Docentes</a></li>
-<li class="breadcrumb-item"><a href="{{route('docentes.create')}}">Registrar Docente</a></li>
+<li class="breadcrumb-item"><a href="{{route('asistentes.index')}}">Listado asistentes</a></li>
+<li class="breadcrumb-item"><a href="{{route('asistentes.create')}}">Registrar asistente</a></li>
 
 @endsection
 
 @section('info')
-<h1><i class="fa fa-plus"></i> Registrar docente</h1>
-<p>Registro de docente en el sistema</p>
+<h1><i class="fa fa-plus"></i> Registrar asistente</h1>
+<p>Registro de asistente en el sistema</p>
 @endsection
 
 @section('contenido')
 <div class="tile">
-    @include('docentes.partials.crear')
+    @include('asistentes.partials.crear')
 </div>
 @endsection
 
 @section('js.plugins')
-<script type="text/javascript" src="/js/plugins/select2.min.js"></script>
 @endsection
 
 @section('js.current')
-<script>
-        $(document).ready(function(){$('#select').select2({
-            placeholder: "Seleccionar materias",
-        
-        });} );
-</script>
 @endsection
