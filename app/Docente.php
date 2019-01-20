@@ -34,10 +34,10 @@ public function scopeName($query, $name){
 
             }
         
-}
+            }
 
-public function scopeEmail($query, $email){
-    if ($email) {
+    public function scopeEmail($query, $email){
+        if ($email) {
         return $query->whereHas('user',
             function($user) use($email)
             {
@@ -46,7 +46,15 @@ public function scopeEmail($query, $email){
             }
         }
 
-
+        public function scopeMateria($query, $codigo){
+            if ($codigo) {
+            return $query->whereHas('materias',
+                function($materias) use($codigo)
+                {
+                $materias->where('codigo',$codigo);
+                });
+                }
+            }
 
 
 }

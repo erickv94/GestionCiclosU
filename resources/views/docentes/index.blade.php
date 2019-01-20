@@ -38,6 +38,17 @@
                   <input class="form-control" type="text" placeholder="Buscar por email" name="email">
                 </div>
                 <div class="form-group col-sm-3">
+                  <select class="form-control col-md-10" id="select"  name='materia'>
+                    <option></option>
+                    @foreach ($materias as $materia)
+                    <option value="{{$materia->codigo}}">
+                      {{$materia->codigo.' - '.$materia->nombre}}
+                    </option>
+                    @endforeach                  
+                </select>
+                
+                </div>
+                <div class="form-group col-sm-3">
                         <label >
                           <input class="form-control" type="checkbox" name='coordinador'>Coordinadores
                         </label>
@@ -54,11 +65,12 @@
           <tr>
             <th>Nombre</th>
             <th>Email</th>
-            <th>coordinador</th>
-            <th>acciones</th>
+            <th>Coordinador</th>
+            <th>Acciones</th>
           </tr>
         </thead>
         <tbody>
+
         @foreach ($docentes as $docente)
             <tr>
             <td>{{$docente->user->name}}</td>
@@ -88,6 +100,8 @@
           </tr>
         @endforeach
 
+        
+
         </tbody>
       </table>
       {!! $docentes->links() !!}
@@ -97,6 +111,8 @@
 
 @section('js.plugins')
 <script src="/js/plugins/sweetalert.min.js">
+</script>
+<script src="/js/plugins/select2.min.js">
 </script>
 @endsection
 
@@ -122,5 +138,12 @@ function confirmar(nombre,id){
       }
     });
   }
+  $(document).ready(function(){$('#select').select2({
+            placeholder: "Seleccionar materia",
+        
+        });} );
+
+
+
 </script>
 @endsection

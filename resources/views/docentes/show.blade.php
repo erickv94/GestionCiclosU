@@ -58,6 +58,47 @@ Planificación de ciclos | Inicio
           </div>
 
         </div>
+
+        <div class="tile mb-4">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="page-header">
+              <h2 class="mb-3 line-head" id="typography">Materias</h2>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-12 ">
+
+            @foreach ($docente->materias as $materia)
+              <h3>Materia</h3>  
+              <p class="lead">{{$materia->codigo}} - {{$materia->nombre}}
+                  <i class="fa fa-book text-success" aria-hidden="true"></i>
+              @switch($materia->nivel)
+                  @case(1)
+                      Primer año
+                      @break
+                  @case(2)
+                      Segundo año
+                      @break
+                  @case(3)
+                      Tercer año
+                      @break
+                  @case(4)
+                      Cuarto año  
+                      @break        
+                  @case(5)
+                      Quinto año 
+                    @break
+                  @endswitch
+              </p>     
+            @endforeach
+
+              
+            </div>
+          </div>
+        </div>
+
     @endsection
 
 @section('js.plugins')

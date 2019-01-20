@@ -56,8 +56,21 @@ class User extends Authenticatable
 
     public function scopeEmail($query, $email){
         if ($email) {
-            return $query->where('name','LIKE',"%$email%");
+            return $query->where('email','LIKE',"%$email%");
         }
+    }
+
+    public function scopeAsistentes($query){
+
+
+            return $query->whereHas('roles',
+                function($roles)
+                {
+                $roles->where('slug','asistente');
+                });
+    
+                
+            
     }
 
 }

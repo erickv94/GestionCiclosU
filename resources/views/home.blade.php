@@ -28,10 +28,10 @@ Planificación de ciclos | Inicio
       </div>
     </div>
     <div class="col-md-6 col-lg-3">
-      <div class="widget-small info coloured-icon"><i class="icon fa fa-thumbs-o-up fa-3x"></i>
+      <div class="widget-small info coloured-icon"><i class="icon fa fa-user-secret fa-3x"></i>
         <div class="info">
           <h4>Asistentes</h4>
-          <p><b>25</b></p>
+          <p><b>{{$asistentes}}</b></p>
         </div>
       </div>
     </div>

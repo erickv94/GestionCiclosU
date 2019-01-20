@@ -19,20 +19,24 @@ class DocenteController extends Controller
         $name=$request->name;
         $email=$request->email;
         $coordinador=$request->coordinador;
+        $materia=$request->materia;
         
-         $docentes= Docente::with(['user'])
+        $docentes= Docente::with(['user'])
+        ->materia($materia)
         ->name($name)
         ->email($email)
         ->esCoordinador($coordinador)
         ->orderBy('created_at','DESC')
         ->paginate(10);
 
+        $materias = Materia::all();
+
         
-    return view('docentes.index',compact(['docentes']));
+    return view('docentes.index',compact(['docentes','materias']));
     }
 
     public function show($id){
-        $docente=Docente::findOrFail($id);
+        $docente=Docente::with('materias')->findOrFail($id);
         
 
         return view('docentes.show',compact('docente'));
@@ -71,12 +75,14 @@ class DocenteController extends Controller
     }
 
     public function edit($id){
-            $docente= Docente::findOrFail($id);
+            $docente= Docente::with('materias')->findOrFail($id);
             $materias= Materia::orderBy('nivel','ASC')->get();
+
             return view('docentes.edit',compact('docente','materias'));
     }
 
     public function update(DocenteRequestUpdate $request, $id){
+
         $docente=Docente::findOrFail($id);
         $docente->gradoAcademico=$request->gradoAcademico;
         $docente->user->name=$request->name;

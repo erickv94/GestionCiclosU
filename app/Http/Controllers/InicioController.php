@@ -25,11 +25,11 @@ class InicioController extends Controller
     public function index()
     {
         $docentes=Docente::/* where('esCoordinador',1)-> */count();
-        //$asistentes=Asistente::count();
+        $asistentes=User::asistentes()->count();
         $materias=Materia::count();
         $locales=Local::count();
 
-        return view('home',compact(['docentes','materias','locales']));
+        return view('home',compact(['docentes','materias','locales','asistentes']));
     }
 
 
