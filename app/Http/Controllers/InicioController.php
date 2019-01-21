@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use App\User;
 use App\Materia;
 use App\Local;
+use Illuminate\Support\Facades\Hash;
 
 class InicioController extends Controller
 {
@@ -74,5 +75,35 @@ class InicioController extends Controller
         }   
 
         //return back()->with('mensaje','Debes colocar tu email correcto');
+    }
+    public function perfil(){
+        $user=auth()->user();
+
+        return view('profile',compact('user'));
+    }
+
+    
+    public function perfilUpdate(Request $request){
+        $user=auth()->user();
+        // si el hash existe
+        if(!Hash::check( $request->password,$user->password ))
+        {
+            return back()->with('warning','La contraseña no coincide con el actual');
+        }
+
+        $request->validate([
+            'confirmacion' => 'required_with:nuevo|same:nuevo',
+            'password' => 'required'
+        ]);
+       
+            $user->password=bcrypt($request->nuevo);
+            $user->updated_at=now();
+            $user->update();
+
+            return back()->with('mensaje','Se cambio tu contraseña con exito ');
+                
+                
+
+        
     }
 }

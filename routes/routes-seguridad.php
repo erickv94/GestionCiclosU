@@ -17,3 +17,6 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('passw
 //verificacion de tokens
 Route::get('verificacion/email/{codigo}','InicioController@verificar')->name('verificacion.email');
 Route::post('password/create','InicioController@createPassword')->name('password.validate');
+//perfil
+Route::get('perfil','InicioController@perfil')->name('perfil');
+Route::post('perfil/update','InicioController@perfilUpdate')->name('perfil.update');
