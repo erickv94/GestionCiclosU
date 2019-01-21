@@ -12,7 +12,9 @@ class Local extends Model
         'nombre', 'codigo', 'tipo',
     ];
     //relaciones con otras entidades
-
+    public function cupos(){
+        $this->hasMany('App/Cupo','local_id','id');
+    }
     //scopes de filtrado
     public function scopeNombre($query,$nombre){
         if($nombre)

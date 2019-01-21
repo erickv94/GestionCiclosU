@@ -52,16 +52,22 @@ class MateriaRequest extends FormRequest
                 'required',
                 Rule::in([1,2,3,4,5])
             ],
-            'materias'=>
+
+            'gruposLaboratorio'=>
             [
+                'numeric',
+                'min:1',
+                'max:10',
                 'required',
-                'max:5',
-                'array'
+                
             ],
-            'materias.*'=>
+            'gruposTeorico'=>
             [
-                'exists:materias,id',
-              
-            ]
+                'numeric',
+                'min:1',
+                'max:10',
+                'required',
+                
+            ],
         ];
     }}

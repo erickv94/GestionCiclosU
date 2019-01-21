@@ -53,6 +53,23 @@ class MateriaRequestUpdate extends FormRequest
                 'required',
                 Rule::in([1,2,3,4,5])
             ],
+            
+            'gruposLaboratorio'=>
+            [
+                'numeric',
+                'min:1',
+                'max:10',
+                'required',
+                
+            ],
+            'gruposTeorico'=>
+            [
+                'numeric',
+                'min:1',
+                'max:10',
+                'required',
+                
+            ],
         ];
     }
 }

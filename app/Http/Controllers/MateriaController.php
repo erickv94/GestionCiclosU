@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Materia;
 use App\Http\Requests\MateriaRequest;
 use App\Http\Requests\MateriaRequestUpdate;
+use App\Grupo;
 
 class MateriaController extends Controller
 {
@@ -25,7 +26,10 @@ class MateriaController extends Controller
 
     public function show($id){
         $materia=Materia::findOrFail($id);
-        return view('materias.show',compact('materia'));
+        $gruposTeorico=$materia->grupos()->where('tipo','GT')->get();
+        $gruposLaboratorio=$materia->grupos()->where('tipo','GL')->get();
+        
+        return view('materias.show',compact('materia','gruposTeorico','gruposLaboratorio'));
     }
 
     public function create()
@@ -35,19 +39,43 @@ class MateriaController extends Controller
 
     public function store(MateriaRequest $request){
       
-         Materia::create($request->all());
-        
+         $materia=Materia::create($request->all());
+
+        for ($i=1; $i <= $request->gruposLaboratorio; $i++) 
+        { 
+            Grupo::create([
+                'nombre'=>'GL-'.$i,
+                'tipo'=>'GL',
+                'materia_id'=>$materia->id,
+            ]);
+            
+        }
+
+        for ($i=1; $i <= $request->gruposTeorico; $i++) 
+        { 
+             Grupo::create([
+                'nombre'=>'GT-'.$i,
+                'tipo'=>'GT',
+                'materia_id'=>$materia->id,
+            ]);
+        }
+
         return back()->with('mensaje','Materia almacenado correctamente');
     }
 
     public function edit($id){
             $materia= Materia::findOrFail($id);
-            return view('materias.edit',compact('materia'));
+            $cantidadGL=$materia->grupos()->where('tipo','GL')->count();
+            $cantidadGT=$materia->grupos()->where('tipo','GT')->count();
+            
+            return view('materias.edit',compact('materia','cantidadGL','cantidadGT'));
     }
 
     public function update(MateriaRequestUpdate $request, $id){
         $materia=Materia::findOrFail($id);
-
+        $cantidadGL=$materia->grupos()->where('tipo','GL')->count();
+        $cantidadGT=$materia->grupos()->where('tipo','GT')->count();
+       //dd($request->all());
         $materia->nombre=$request->nombre;
         $materia->codigo=$request->codigo;
         $materia->ciclo=$request->ciclo;
@@ -55,6 +83,55 @@ class MateriaController extends Controller
         $materia->descripcion=$request->descripcion;
         
         $materia->update();
+        //Caso de adiccion de nuevos grupos teoricos
+        if($request->gruposTeorico > $cantidadGT)
+        {
+            for ($cantidadGT; $cantidadGT < $request->gruposTeorico ; $cantidadGT++) { 
+                //crea los adiccionales
+                Grupo::create([
+                    'nombre'=>'GT-'.($cantidadGT+1),
+                    'tipo'=>'GT',
+                    'materia_id'=>$materia->id,
+                ]);
+                
+            }
+        }
+        //caso de eliminacion
+        elseif($request->gruposTeorico < $cantidadGT)
+        {
+            for ($cantidadGT; $cantidadGT > $request->gruposTeorico; $cantidadGT--) { 
+                //encuentra el objeto que toma el id propio, y el numero de grupo de manera recursiva
+                $borrado=Grupo::where('nombre','GT-'.$cantidadGT)
+                ->where('materia_id',$materia->id)->first();
+                //elimina
+                $borrado->delete();
+            }        
+        }
+        /**
+         * Misma logica que el caso de grupos teoricos
+         * posible refactorizacion aqui
+         */
+        if($request->gruposLaboratorio > $cantidadGL)
+        {
+            for ($cantidadGL; $cantidadGL < $request->gruposLaboratorio ; $cantidadGL++) { 
+
+                Grupo::create([
+                    'nombre'=>'GL-'.($cantidadGL+1),
+                    'tipo'=>'GL',
+                    'materia_id'=>$materia->id,
+                ]);
+                
+            }
+        }
+        elseif($request->gruposLaboratorio < $cantidadGL)
+        {
+            for ($cantidadGL; $cantidadGL > $request->gruposLaboratorio; $cantidadGL--) { 
+
+                $borrado=Grupo::where('nombre','GL-'.$cantidadGL)
+                ->where('materia_id',$materia->id)->first();
+                $borrado->delete();
+            }
+        }
         return back()->with('mensaje','Materia '.$materia->nombre.' ha sido actualizado con exito');
     }
 

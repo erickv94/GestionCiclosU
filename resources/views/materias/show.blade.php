@@ -41,12 +41,45 @@ Planificación de ciclos | Inicio
               <h3>Fecha de registro</h3>
               <p class="lead">{{$materia->created_at}}</p>
               <h3>Fecha de actualización</h3>
-              <p class="lead">{{$materia->update_at??'No se ha actualizado'}}</p>
+              <p class="lead">{{$materia->updated_at??'No se ha actualizado'}}</p>
 
           </div>
 
         </div>
-    @endsection
+      </div>
+
+
+
+
+      <div class="tile mb-4">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="page-header">
+              <h2 class="mb-3 line-head" id="typography">Grupos Teoricos y Grupos Laboratorio</h2>
+              </div>
+            </div>
+          </div>
+          <!-- Headings-->
+          <div class="row">
+            <div class="col-lg-6">
+              <h3>Grupos Teoricos <i class="fa fa-check-circle" aria-hidden="true"></i></h3>
+            @foreach ($gruposTeorico as $gt)
+            <p class="lead">{{$gt->nombre}}</p>                
+            @endforeach
+
+            </div>
+            <div class="col-lg-6">
+                <h3>Grupos Laboratorio <i class="fa fa-check-circle" aria-hidden="true"></i></h3>
+              @foreach ($gruposLaboratorio as $gl)
+               <p class="lead">{{$gl->nombre}}</p>
+           
+              @endforeach
+            </div>
+  
+          </div>
+        </div>
+  
+      @endsection
 
 @section('js.plugins')
 @endsection

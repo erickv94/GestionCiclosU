@@ -6,11 +6,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class Materia extends Model
 {
-    protected $fillable=['nombre','codigo','descripcion','ciclo'];
+    protected $fillable=['nombre','codigo','descripcion','ciclo','nivel'];
     
     //relaciones
     public function docentes(){
         return $this->belongsToMany('App\Docente','docentes_materias');
+    }
+    public function grupos(){
+        return $this->hasMany('App\Grupo');
+    }
+    public function cupos(){
+        return $this->hasMany('App\Cupo');
     }
     //scoopes
     public function scopeNombre($query,$nombre)

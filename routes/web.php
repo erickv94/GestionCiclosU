@@ -44,6 +44,7 @@ Route::group(['middleware' => ['auth']], function () {
     require_once( __DIR__.'/routes-locales.php');
     require_once( __DIR__.'/routes-materias.php');
     require_once( __DIR__.'/routes-asistentes.php');
+    require_once( __DIR__.'/routes-planificacion.php');
     
     
 

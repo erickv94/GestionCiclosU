@@ -18,6 +18,22 @@
       </div>
     </div>
     <div class="form-group row">
+        <label class="control-label col-md-3">Cantidad grupos teoricos</label>
+        <div class="col-md-8">
+            <input class="form-control col-md-8 " type="number" min="1" max="10" name="gruposTeorico" value="{{old('gruposTeorico')??$cantidadGT}}">    
+            {!! validacion($errors,'gruposTeorico') !!}
+      
+          </div>
+      </div>
+      <div class="form-group row">
+          <label class="control-label col-md-3">Cantidad grupos Laboratorio</label>
+          <div class="col-md-8">
+              <input class="form-control col-md-8 " type="number" min="1" max="10" name="gruposLaboratorio" value="{{old('gruposLaboratorio')??$cantidadGL}}">    
+              {!! validacion($errors,'gruposLaboratorio') !!}
+      
+            </div>
+        </div>
+    <div class="form-group row">
       <label class="control-label col-md-3">Descripción</label>
       <div class="col-md-8">
             <textarea  rows="5" class="form-control col-md-8 {{$errors->has('descripcion')?'is-invalid':''}}" type='text' name="descripcion" placeholder="Ingresar descripcion (opcional)" value="{{ old('descripcion')??$materia->descripcion}}">
