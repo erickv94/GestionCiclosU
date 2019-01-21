@@ -55,7 +55,7 @@
       <ul class="app-menu">
       <li><a class="app-menu__item {{isActive('inicio')}}" href="{{route('home')}}"><i class="app-menu__icon fa fa-dashboard "></i><span class="app-menu__label">Dashboard</span></a></li>
         <li><a class="app-menu__item {{isActive('inicio')}}" href="{{route('home')}}"><i class="app-menu__icon fa fa-calendar "></i><span class="app-menu__label">Gestión Horario</span></a></li>
-        <li><a class="app-menu__item {{isActive('docentes')}}" href="{{route('docentes.index')}}"><i class="app-menu__icon fa fa-users "></i><span class="app-menu__label">Gestión docentes</span></a></li>
+        <li><a class="app-menu__item {{isActive('docentes')}}" href="{{route('docentes.index')}}"><i class="app-menu__icon fa fa-users "></i><span class="app-menu__label">Gestión Docentes</span></a></li>
         <li><a class="app-menu__item {{isActive('materias')}}" href="{{route('materias.index')}}"><i class="app-menu__icon fa fa-book "></i><span class="app-menu__label">Gestión Materias</span></a></li>       
         <li><a class="app-menu__item {{isActive('locales')}}" href="{{route('locales.index')}}"><i class="app-menu__icon fa fa-building-o "></i><span class="app-menu__label">Gestión Locales</span></a></li>      
         <li><a class="app-menu__item {{isActive('asistentes')}}" href="{{route('asistentes.index')}}"><i class="app-menu__icon fa fa-user-secret "></i><span class="app-menu__label">Gestión Asistentes</span></a></li>

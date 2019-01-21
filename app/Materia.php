@@ -18,6 +18,10 @@ class Materia extends Model
     public function cupos(){
         return $this->hasMany('App\Cupo');
     }
+
+    public function docente(){
+        return $this->belongsTo('App\Docente');
+    }
     //scoopes
     public function scopeNombre($query,$nombre)
     {
