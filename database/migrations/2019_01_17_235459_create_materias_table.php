@@ -21,7 +21,7 @@ class CreateMateriasTable extends Migration
             $table->string('descripcion')->nullable();
             $table->enum('ciclo',['Impar','Par','Ambos']);
             $table->enum('nivel',[1,2,3,4,5]);
-            $table->unsignedInteger('docente_id')->nullable();
+            $table->unsignedInteger('docente_id')->nullable()->unique();
             $table->timestamps();
             $table->foreign('docente_id')->references('id')->on('docentes')->onDelete('cascade');
         });

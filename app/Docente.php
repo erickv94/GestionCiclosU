@@ -12,7 +12,7 @@ class Docente extends Model
         return $this->belongsTo('App\User');
     }
     public function materia(){
-        $this->hasOne('App\Materia');
+      return  $this->hasOne('App\Materia','docente_id','id');
     }
     public function materias(){
         return $this->belongsToMany('App\Materia','docentes_materias');

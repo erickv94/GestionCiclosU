@@ -138,11 +138,10 @@ function confirmar(nombre,id){
       }
     });
   }
-  $(document).ready(function(){$('#select').select2({
+$('#select').select2({
             placeholder: "Seleccionar materia",
         
-        });} );
-
+        });
 
 
 </script>

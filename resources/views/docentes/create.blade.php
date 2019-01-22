@@ -31,9 +31,16 @@ Planificación de ciclos | Inicio
 
 @section('js.current')
 <script>
-        $(document).ready(function(){$('#select').select2({
-            placeholder: "Seleccionar materias",
-        
-        });} );
+$('#select').select2({
+        placeholder: "Seleccionar materias",
+    
+    });
+
+$('#select2').select2({
+    placeholder: "Seleccionar materia a coordinar (opcional)",
+    width:'resolve'
+});
+
+
 </script>
 @endsection

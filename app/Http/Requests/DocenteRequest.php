@@ -4,6 +4,8 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use Illuminate\Http\Request;
+use Illuminate\Routing\Route;
 
 class DocenteRequest extends FormRequest
 {
@@ -12,6 +14,7 @@ class DocenteRequest extends FormRequest
      *
      * @return bool
      */
+
     public function authorize()
     {
         return true;
@@ -56,7 +59,21 @@ class DocenteRequest extends FormRequest
             'materias'=>[
                 'nullable',
                 'max:4'
-            ]
+            ],
+            'materia'=>[
+                'nullable',
+                'exists:materias,id',
+                 Rule::in($this->materias),
+            ],
+
+  
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'materia.in'=>'La materia que se debe coordinadar, debe ser parte de las que imparte'
         ];
     }
 }

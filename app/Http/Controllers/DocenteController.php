@@ -50,6 +50,27 @@ class DocenteController extends Controller
     }
 
     public function store(DocenteRequest $request){
+        //de entrada relaciona si posee alguna disponiblidad la materia para ser coordinada
+        $bandera=false;
+        if($request->materia&&($request->delegar==false))
+        {
+            $materiaDisponible=Materia::find($request->materia);   
+            if($materiaDisponible->docente_id)
+            {
+                $nombreCoordinador=$materiaDisponible->docente->user->name;
+            
+                return back()->with('error','La materia a coordinar, ya dispone de coordinador, 
+                por lo tanto no se guardo el docente en el sistema')
+                ->with('mensaje','Puede asignar al docente con la coordinación,
+                 eliminando la cordinación del docente '.$nombreCoordinador)
+                ->withInput($request->toArray())
+                ->with('activate',true);
+           
+            }
+            else
+                $bandera=true;
+            
+            }
 
         $user= new User();
         $user->name=$request->name;
@@ -58,7 +79,7 @@ class DocenteController extends Controller
         $user->codigoVerificacion=str_random(25);
         $user->save();
         //se asigna el rol docente
-        $user->assignRole(4);
+        $user->assignRole(2);
         //se crea instancia docente
         $docente=new Docente();
         $docente->gradoAcademico=$request->gradoAcademico??'Docente';
@@ -67,11 +88,32 @@ class DocenteController extends Controller
         $docente->save();
         //hace append de materias
         $docente->materias()->sync($request->materias);
+        
+        
+        if($request->delegar||$bandera)
+        {
+            $materia=Materia::find($request->materia);
+                //si posee un id la materia a coordinar lo escribe como coordinacion false
+                if($materia->docente_id)
+                {
+                    $materia->docente->esCoordinador=false;
+                    $materia->push();
+                }
+
+            $materia->docente()->associate($docente);
+            $docente->esCoordinador=true;
+            $docente->user->syncRoles([3]);
+            $docente->update();
+            $materia->update();
+
+            $addMensaje=$request->delegar?' Se asigno cordinacion de la materia '.$materia->nombre:'';
+    
+        }
 
 
-        event(new CreateUser($user));
+//        event(new CreateUser($user));
 
-        return back()->with('mensaje','docente almacenado correctamente, se envio email de validacion');
+        return back()->with('mensaje','docente almacenado correctamente, se envio email de validacion'.($addMensaje??''));
     }
 
     public function edit($id){
@@ -82,15 +124,86 @@ class DocenteController extends Controller
     }
 
     public function update(DocenteRequestUpdate $request, $id){
-
+        //
         $docente=Docente::findOrFail($id);
+        $bandera=false;
+        if($request->materia&&($request->delegar==false))
+        {
+            $materiaDisponible=Materia::find($request->materia);  
+            //en caso de que sea la misma 
+            if($materiaDisponible->docente_id==$docente->id)
+            {
+                return back()->with('mensaje','La materia a coordinar, ya es cordinada por este docente')
+                ->withInput($request->toArray());
+            }
+
+           if($materiaDisponible->docente_id)
+            {
+                $nombreCoordinador=$materiaDisponible->docente->user->name;
+            
+                return back()->with('error','La materia a coordinar, ya dispone de coordinador, 
+                por lo tanto no se actualizo el docente en el sistema')
+                ->with('mensaje','Puede asignar al docente con la coordinación,
+                 eliminando la cordinación del docente '.$nombreCoordinador)
+                ->withInput($request->toArray())
+                ->with('activate',true);
+           
+            }
+            else
+                $bandera=true;
+            
+        }
+
+        $emailViejo;
+
         $docente->gradoAcademico=$request->gradoAcademico;
         $docente->user->name=$request->name;
+        //si se actualiza crea un nuevo codigo de verificacion, si el email es diferente
+        $emailViejo=$docente->user->email;  
+
+        if($request->email!==$docente->user->email)
+           $docente->user->codigoVerificacion=str_random(25);
+          
+        
         $docente->user->email=$request->email;
         $docente->user->sexo=$request->sexo;
         $docente->materias()->sync($request->materias);
         $docente->user->push();
-        return back()->with('mensaje','Docente '.$docente->user->name.' ha sido actualizado con exito');
+       
+        //despues de actualizado se ejecuta evento de envio de email        
+        if($request->email!==$emailViejo)
+        {   $addMessage=', se envio codigo de verificación a nuevo email';
+            // event(new CreateUser($docente->user));
+        }
+
+        if($request->delegar||$bandera)
+        {
+            $materia=Materia::find($request->materia);
+            //si docente ya cordina una materia le quita el id a su materia
+           if ($docente->materia){
+               $docente->materia->docente_id=null;
+             }
+
+            //si posee un id la materia a coordinar lo escribe como coordinacion false
+            if($materia->docente_id)
+            {
+                $materia->docente->esCoordinador=false;
+                $materia->push();
+            }
+
+            $docente->user->syncRoles([3]);
+            $docente->esCoordinador=true;
+            $docente->push();
+             
+            $materia->docente()->associate($docente);
+            $materia->update();
+
+            $addMensajeCoordinacion=$request->delegar?', Se asigno cordinacion de la materia '.$materia->nombre:'';
+    
+        }
+
+        return back()->with('mensaje','Docente '.$docente->user->name.
+        ' ha sido actualizado con exito'.($addMessage??'').($addMensajeCoordinacion??''));
     }
 
     public function inhabilitar($id)
@@ -118,8 +231,15 @@ class DocenteController extends Controller
     {
         $docente=Docente::findOrFail($id);
         $user=$docente->user;
+
+        if($docente->materia){
+            $addMensaje=', Se elimino la coordinacion relacionada a '.$docente->materia->nombre;
+            $docente->materia->docente_id=null;
+            $docente->push();
+
+        }
         User::find($user->id)->delete();
 
-        return back()->with('mensaje','Docente '.$user->name.' fue eliminado con exito');
+        return back()->with('mensaje','Docente '.$user->name.' fue eliminado con exito'.($addMensaje??''));
     }
 }

@@ -72,8 +72,9 @@ Planificación de ciclos | Inicio
 
             @foreach ($docente->materias as $materia)
               <h3>Materia</h3>  
-              <p class="lead">{{$materia->codigo}} - {{$materia->nombre}}
-                  <i class="fa fa-book text-success" aria-hidden="true"></i>
+              <p class="lead">{{$materia->codigo}} - {{$materia->nombre}} - 
+                  <i class="fa fa-book text-success" aria-hidden="true"></i> 
+     
               @switch($materia->nivel)
                   @case(1)
                       Primer año
@@ -91,6 +92,8 @@ Planificación de ciclos | Inicio
                       Quinto año 
                     @break
                   @endswitch
+                  {!!$docente->materia->id==$materia->id?'- Coordinador <i class="fa fa-check-circle" aria-hidden="true"></i>':''!!}
+
               </p>     
             @endforeach
 

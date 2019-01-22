@@ -19,7 +19,7 @@ class UserSeeder extends Seeder
             'esVerificado'=>true,
             'sexo'=>'Masculino',
             'codigoVerificacion'=>str_random(25),
-            'email'=>'admin@example.com',
+            'email'=>'admin@ues.edu.sv',
             'password'=>bcrypt('admin'),
         ]);
 
@@ -28,7 +28,7 @@ class UserSeeder extends Seeder
             'esVerificado'=>true,
             'sexo'=>'Femenino',
             'codigoVerificacion'=>str_random(25),
-            'email'=>'docente1@example.com',
+            'email'=>'docente1@ues.edu.sv',
             'password'=>bcrypt('docente'),
         ]);
         Docente::create([
@@ -40,7 +40,7 @@ class UserSeeder extends Seeder
             'name'=>'Samantha Docente',
             'codigoVerificacion'=>str_random(25),
             'sexo'=>'Femenino',
-            'email'=>'docente2@example.com',
+            'email'=>'docente2@ues.edu.sv',
             'password'=>bcrypt('docente'),
         ]);
 
@@ -52,16 +52,17 @@ class UserSeeder extends Seeder
             'name'=>'Eduardo Asistente',
             'codigoVerificacion'=>str_random(25),
             'sexo'=>'Masculino',
-            'email'=>'asistente@example.com',
+            'email'=>'asistente@ues.edu.sv',
             'password'=>bcrypt('asistente'),
         ]);
 
         //docentes mas
-    factory(App\User::class, 20)->create()->each(function($user){
+    factory(App\User::class, 30)->create()->each(function($user){
         
         $user->docente()->save(new Docente());
         $user->assignRole(2);
     });
+
     //3 asistentes mas 
     factory(App\User::class, 3)->create()->each(function($user){
         

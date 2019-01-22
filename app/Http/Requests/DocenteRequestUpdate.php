@@ -5,6 +5,8 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 use App\Docente;
+use Illuminate\Http\Request;
+
 
 class DocenteRequestUpdate extends FormRequest
 {
@@ -54,7 +56,21 @@ class DocenteRequestUpdate extends FormRequest
                 'regex:/^([a-zA-ZñÑáéíóúÁÉÍÓÚ])+((\s*)+([a-zA-ZñÑáéíóúÁÉÍÓÚ\.]*)*)+$/',
                 'max:50',
                 'min:4'
-                ]
+            ],
+            'materia'=>[
+                'nullable',
+                'exists:materias,id',
+                 Rule::in($this->materias),
+            ],
+
+
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'materia.in'=>'La materia que se debe coordinadar, debe ser parte de las que imparte'
         ];
     }
 }

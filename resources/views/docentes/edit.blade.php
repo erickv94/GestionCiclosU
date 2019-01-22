@@ -31,7 +31,9 @@ Planificación de ciclos | Gestión docentes
 
 @section('js.current')
 <script>
-        $(document).ready(function(){$('#select').select2({
+        $(document).ready(function(){$('#select').select2();});
+        $(document).ready(function(){$('#select2').select2({
+            placeholder: "Seleccionar materia a coordinar (opcional)",
             width:'resolve'
         });} );
        </script>

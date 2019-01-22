@@ -75,7 +75,15 @@
             @yield('breadcrumb')
         </ul>
       </div>
-      
+      @if (session()->has('error'))
+    
+      <div class="alert alert-danger text-center animated fadeIn">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+            {{session()->get('error')}}
+      </div>
+      @endif      
       @if (session()->has('mensaje'))
       <div class="alert alert-success text-center animated fadeIn">
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -92,15 +100,7 @@
             {{session()->get('warning')}}
       </div>
       @endif
-      @if (session()->has('error'))
-    
-      <div class="alert alert-danger text-center animated fadeIn">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-            {{session()->get('error')}}
-      </div>
-      @endif
+
             @yield('contenido')
 
     </main>
@@ -111,7 +111,7 @@
     <script src="/js/plugins/pace.min.js"></script>
     <script src="/js/main.js"></script>
     <!-- The javascript plugin to display page loading on top-->
-    <script src="js/plugins/pace.min.js"></script>
+    <script src="/js/plugins/pace.min.js"></script>
     @yield('js.plugins')
     @yield('js.current')
 
