@@ -43,7 +43,7 @@ class AsistenteController extends Controller
         //se asigna el rol docente
         $user->assignRole(4);
 
-    //  event(new CreateUser($user));
+        event(new CreateUser($user));
 
         return back()->with('mensaje','Asistente almacenado correctamente, se envio email de validacion');
         }
@@ -69,7 +69,7 @@ class AsistenteController extends Controller
             //enviar codigo de verificacion a nuevo email
             if($emailViejo!==$request->email)
             {
-            // event(new CreateUser($asistente));
+                event(new CreateUser($asistente));
                 $addMessage=' se envio codigo de verificación al email actualizado';
             }
             

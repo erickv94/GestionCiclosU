@@ -111,7 +111,7 @@ class DocenteController extends Controller
         }
 
 
-//        event(new CreateUser($user));
+            event(new CreateUser($user));
 
         return back()->with('mensaje','docente almacenado correctamente, se envio email de validacion'.($addMensaje??''));
     }
@@ -173,7 +173,7 @@ class DocenteController extends Controller
         //despues de actualizado se ejecuta evento de envio de email        
         if($request->email!==$emailViejo)
         {   $addMessage=', se envio codigo de verificación a nuevo email';
-            // event(new CreateUser($docente->user));
+             event(new CreateUser($docente->user));
         }
 
         if($request->delegar||$bandera)
