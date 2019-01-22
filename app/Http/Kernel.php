@@ -67,6 +67,8 @@ class Kernel extends HttpKernel
         //middlewares de reglas de negocio
         'afterLogin'=> \App\Http\Middleware\AfterLoginMiddleware::class,
         'verificado'=> \App\Http\Middleware\verificacionMiddleware::class,
+        'planTerminado'=>\App\Http\Middleware\beforeIndexPlanificacion::class,
+        'periodoActivo'=>\App\Http\Middleware\periodoActivo::class
     ];
 
     /**

@@ -30,12 +30,14 @@ display:inline;
                   <a class="btn btn-primary" href="{{route('planificaciones.create')}}"><i class="fa fa-lg fa-plus"></i> Crear</a>
               </div>
               </div>    
-              <form class="row" method="GET" action="{{route('planificaciones.index')}}">
-                          <div class="form-group col-sm-3">
-                <input class="form-control" type="text" placeholder="Buscar por nombre" name='nombre'>
+              <form class="row" method="GET" action="{{route('planificaciones.index')}}" autocomplete="off">
+                <div class="form-group col-sm-3">
+                    <input class="form-control cold-md-3" id="fechaInicio" type="text" name="fechaInicio" placeholder="Fecha en adelante"
+                     value="{{request('fechaInicio')}}">
               </div>
               <div class="form-group col-sm-3">
-                <input class="form-control" type="text" placeholder="Buscar por codigo" name="codigo">
+                  <input class="form-control cold-md-3" id="fechaFin" type="text" name="fechaFin" placeholder="Hasta la fecha"
+                   value="{{request('fechaFin')}}">
               </div>
 
               <div class="form-group col-sm-3 ">
@@ -51,26 +53,37 @@ display:inline;
           <th>Ciclo</th>
           <th>Fecha Inicio</th>
           <th>Fecha Fin</th>
-          <th> Terminado </th>
+          <th> Estado </th>
           <th>Acciones</th>
         </tr>
       </thead>
       <tbody>
       @foreach ($planificaciones as $planificacion)
           <tr>
-          <td>{{$planificacion->ciclo}}</td>
+          <td>{{$planificacion->ciclo==1?'I':'II'}}</td>
           <td>{{$planificacion->fechaInicio}}</td>
-          <td>{{$planificacion->Fechafin}}</td>
-          <td></td>
+          <td>{{$planificacion->fechaFin}}</td>
+          @if($planificacion->estado==='activo')
+          <td>{!!'<i class="fa fa-clock-o" aria-hidden="true"></i> En proceso'!!}</td>
+          @else
+          <td>{!!$planificacion->estado==='tiempo'?'<i class="fa fa-calendar-times-o" aria-hidden="true"></i> Tiempo Finalizado':'<i class="fa fa-check-circle-o" aria-hidden="true"></i> Terminado'!!}</td>
+          @endif
           <td>
           <a href="{{route('planificaciones.show',$planificacion->id)}}" class="btn btn-outline-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> Mostrar</a>
           <a href="{{route('planificaciones.edit',$planificacion->id)}}" class="btn btn-outline-primary btn-sm"><i class="fa fa-pencil" aria-hidden="true"></i> Editar</a>
-       
-          <form id="delete-{{$planificacion->id}}" class='accion-form' action="{{ route('planificaciones.destroy', $planificacion->id)}}" method="post">
+          
+          <form id="delete-{{$planificacion->id}}" autocomplete="off" class='accion-form' action="{{ route('planificaciones.destroy', $planificacion->id)}}" method="post">
               @csrf
               @method('DELETE')
           <button class="btn btn-outline-danger btn-sm" type="button" onclick="confirmar('{{$planificacion->fechaInicio}}-{{$planificacion->fechaFin}}',{{$planificacion->id}})"><i class="fa fa-trash" aria-hidden="true"></i>  Eliminar</button>
             </form>
+            @if($planificacion->estado=='terminado')
+          <form id="finalizar-{{$planificacion->id}}" autocomplete="off" class='accion-form' action="{{ route('planificaciones.finalizar', $planificacion->id)}}" method="post">
+              @csrf
+              @method('PUT')
+            <button class="btn btn-outline-warning btn-sm" type="button" onclick="finalizar('{{$planificacion->fechaInicio}}-{{$planificacion->fechaFin}}',{{$planificacion->id}})"><i class="fa fa-calendar-times-o" aria-hidden="true"></i>  Finalizar</button>
+            </form>
+            @endif
 
           </td>
         </tr>
@@ -86,10 +99,27 @@ display:inline;
 @section('js.plugins')
 <script src="/js/plugins/sweetalert.min.js">
 </script>
+<script type="text/javascript" src="/js/plugins/bootstrap-datepicker.min.js"></script>
+
 @endsection
 
 @section('js.current')
 <script type="text/javascript">
+
+
+
+$('#fechaInicio').datepicker({
+    format: "yyyy-mm-dd",
+    autoclose: true,
+    todayHighlight: true
+});
+
+$('#fechaFin').datepicker({
+    format: "yyyy-mm-dd",
+    autoclose: true,
+    todayHighlight: true
+});
+
 
 function confirmar(nombre,id){
     swal({
@@ -107,6 +137,27 @@ function confirmar(nombre,id){
         document.getElementById('delete-'+id).submit();
       } else {
         swal("Cancelado!", "No se ha elimando nada:)", "error");
+      }
+    });
+  }
+
+
+  function finalizar(nombre,id){
+    swal({
+      title: "Esta seguro de finalizar la planificación de fecha: "+nombre+" ?",
+      text: "Una vez finalizado no podra aumentar el tiempo",
+      type: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Si",
+      cancelButtonText: "No, cancelar",
+      closeOnConfirm: false,
+      closeOnCancel: false
+    }, function(isConfirm) {
+      if (isConfirm) {
+        swal("Hecho!", "Planificación ha sido marcada con estado terminado.", "success");
+        document.getElementById('finalizar-'+id).submit();
+      } else {
+        swal("Cancelado!", "No se ha hecho nada :)", "error");
       }
     });
   }

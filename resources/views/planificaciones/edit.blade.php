@@ -9,26 +9,43 @@ Planificación de ciclos | Inicio
 
 
 @section('breadcrumb')
-<li class="breadcrumb-item"><a href="{{route('locales.index')}}">Listado Locales</a></li>
-<li class="breadcrumb-item"><a href="{{route('locales.edit',$local->id)}}">Editar Local</a></li>
+<li class="breadcrumb-item"><a href="{{route('planificaciones.index')}}">Listado planificaciones</a></li>
+<li class="breadcrumb-item"><a href="{{route('planificaciones.edit',$planificacion->id)}}">Editar Planificación</a></li>
 
 @endsection
 
 @section('info')
-<h1><i class="fa fa-plus"></i> Editar Local</h1>
-<p>Actualizacion de local en el sistema</p>
+<h1><i class="fa fa-plus"></i> Editar Planificación</h1>
+<p>Actualizacion de Planificación en el sistema</p>
 @endsection
 
 @section('contenido')
 <div class="tile">
-    @include('locales.partials.edit')
+    @include('planificaciones.partials.edit')
 </div>
 @endsection
 
 @section('js.plugins')
+<script type="text/javascript" src="/js/plugins/bootstrap-datepicker.min.js"></script>
 @endsection
 
 @section('js.current')
+<script>
 
+
+
+$('#fechaInicio').datepicker({
+    format: "yyyy-mm-dd",
+    autoclose: true,
+    todayHighlight: true
+});
+
+$('#fechaFin').datepicker({
+    format: "yyyy-mm-dd",
+    autoclose: true,
+    todayHighlight: true
+});
+
+</script>
 
 @endsection

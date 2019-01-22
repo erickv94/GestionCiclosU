@@ -9,13 +9,13 @@ Planificación de ciclos | Inicio
 
 
 @section('breadcrumb')
-<li class="breadcrumb-item"><a href="{{route('locales.index')}}">Listado locales</a></li>
-<li class="breadcrumb-item"><a href="{{route('locales.show',$local->id)}}">Mostrar local</a></li>
+<li class="breadcrumb-item"><a href="{{route('planificaciones.index')}}">Listado planificaciones</a></li>
+<li class="breadcrumb-item"><a href="{{route('planificaciones.show',$planificacion->id)}}">Mostrar planificación</a></li>
 @endsection
 
 @section('info')
-<h1><i class="fa fa-eye"></i> Mostrar detalles de local</h1>
-<p>Muestra los detalles de local</p>
+<h1><i class="fa fa-eye"></i> Mostrar detalles de planificación</h1>
+<p>Muestra los detalles de planificación</p>
 @endsection
 
 @section('contenido')
@@ -23,7 +23,7 @@ Planificación de ciclos | Inicio
         <div class="row">
           <div class="col-lg-12">
             <div class="page-header">
-            <h2 class="mb-3 line-head" id="typography">{{$local->nombre}}</h2>
+            <h2 class="mb-3 line-head" id="typography">Planificación datos</h2>
             </div>
           </div>
         </div>
@@ -31,21 +31,30 @@ Planificación de ciclos | Inicio
         <div class="row">
           <div class="col-lg-6">
           
-            <h3>Codigo</h3>
-            <p class="lead">{!!$local->codigo??"<i class='fa fa-info text-info' aria-hidden='true'></i> No se ha definido"!!}</p>
-            <h3>Tipo</h3>
-            <p class="lead">{!!$local->tipo??"<i class='fa fa-info text-info' aria-hidden='true'></i> No se ha definido"!!}</p>
-            <h3>Local Habilitado</h3>
-            <p class="lead">{!!$local->habilitado?"<i class='fa fa-check text-success' aria-hidden='true'></i> Si":"<i class='fa fa-close text-danger' aria-hidden='true'></i> No"!!}</p>
+            <h3>Fecha de inicio</h3>
+            <p class="lead">
+              {{$planificacion->fechaInicio}} <i class="fa fa-calendar" aria-hidden="true"></i></p>
+            <h3>Fecha de fin</h3>
+            <p class='lead'>
+              {{$planificacion->fechaInicio}} <i class="fa fa-calendar" aria-hidden="true"></i></p>            
+            <h3>Ciclo</h3>
+            <p class="lead">
+              {{$planificacion->ciclo}}
+            </p>
                     
           </div>
           <div class="col-lg-6">
               <h3>Fecha de registro</h3>
-              <p class="lead">{{$local->created_at}}</p>
+              <p class="lead">{{$planificacion->created_at}}</p>
               <h3>Fecha de actualización</h3>
-              <p class="lead">{{$local->update_at??'No se ha actualizado'}}</p>
-
-          </div>
+              <p class="lead">{{$planificacion->updated_at??'No se ha actualizado'}}</p>
+              <h3>Estado</h3>
+              @if($planificacion->estado==='activo')
+              <p class='lead'>{!!'<i class="fa fa-clock-o" aria-hidden="true"></i> En proceso'!!}</p>
+              @else
+              <p class='lead'>{!!$planificacion->estado==='tiempo'?'<i class="fa fa-calendar-times-o" aria-hidden="true"></i> Tiempo Finalizado':'<i class="fa fa-check-circle-o" aria-hidden="true"></i> Terminado'!!}</p>
+              @endif
+            </div>
 
         </div>
     @endsection

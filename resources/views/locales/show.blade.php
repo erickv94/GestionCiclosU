@@ -43,7 +43,7 @@ Planificación de ciclos | Inicio
               <h3>Fecha de registro</h3>
               <p class="lead">{{$local->created_at}}</p>
               <h3>Fecha de actualización</h3>
-              <p class="lead">{{$local->update_at??'No se ha actualizado'}}</p>
+              <p class="lead">{{$local->updated_at??'No se ha actualizado'}}</p>
 
           </div>
 

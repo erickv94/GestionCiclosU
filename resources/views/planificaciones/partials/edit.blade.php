@@ -1,31 +1,50 @@
-<h3 class="tile-title">Actualizar datos de local</h3>
+<h3 class="tile-title">Seleccionar la configuración del horario</h3>
 <div class="tile-body">
-<form class="form-horizontal" id="crear" action="{{route('locales.update',$local->id)}}" method="POST">
+<form class="form-horizontal" id="crear" action="{{route('planificaciones.update',$planificacion->id)}}" method="POST" autocomplete="off">
     <div class="form-group row">
       @csrf
       @method('PUT')
-      <label class="control-label col-md-3">Nombre</label>
-      <div class="col-md-8">
-        <input class="form-control col-md-8 {{$errors->has('nombre')?'is-invalid':''}}" type="text" name="nombre" placeholder="Ingresar nombre del local" value="{{ old('nombre')??$local->nombre }}">
-        {!! validacion($errors,'nombre') !!}
+      <label class="control-label col-md-3">Fecha Inicio</label>
+      <div class="col-md-4">
+        <input class="form-control cold-md-3" id='fechaInicio' type="text" name='fechaInicio' placeholder="seleccionar fecha inicio" value={{old('fechaInicio')??$planificacion->fechaInicio}}>
+        {!! validacion($errors,'fechaInicio') !!}
       </div>
     </div>
     <div class="form-group row">
-      <label class="control-label col-md-3">Codigo</label>
-      <div class="col-md-8">
-        <input class="form-control col-md-8 {{$errors->has('codigo')?'is-invalid':''}}" type="email" name='codigo' placeholder="Ingresar codigo del local (opcional)" value="{{ old('codigo')??$local->codigo}}">
-        {!! validacion($errors,'codigo') !!}
+      <label class="control-label col-md-3">Fecha Fin</label>
+      <div class="col-md-4">
+        <input class="form-control cold-md-3"  type="text" id='fechaFin' name='fechaFin' placeholder="seleccionar fecha finalizacion" value={{old('fechaFin')??$planificacion->fechaFin}}>
+         {!! validacion($errors,'fechaFin') !!}
       </div>
     </div>
     <div class="form-group row">
-      <label class="control-label col-md-3">Tipo Local</label>
+      <label class="control-label col-md-3">Ciclo</label>
       <div class="col-md-8">
-            <input class="form-control col-md-8 {{$errors->has('tipo')?'is-invalid':''}}" type='text' name="tipo" placeholder="Ingresar titulo academico (opcional)" value="{{ old('tipo')??$local->tipo}}">
-            {!! validacion($errors,'tipo') !!}
+        <select class="form-control col-md-6 " id="select" name="ciclo">
+         
+          <option >Seleccionar ciclo academico</option>
+          @if (old('ciclo'))
+             <option value="1" {{old('ciclo')==1?'selected':''}}>Ciclo I</option>
+             <option value="2" {{old('ciclo')==2?'selected':''}}>Ciclo II</option>                
+          @else
+          <option value="1" {{$planificacion->ciclo==1?'selected':''}}>Ciclo I</option>
+          <option value="2" {{$planificacion->ciclo==2?'selected':''}}>Ciclo II</option>
+          @endif
+            
+         
+        </select>
+        {!! validacion($errors,'ciclo') !!}
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="control-label col-md-3">Descripción</label>
+      <div class="col-md-8">
+      <textarea rows="5" class="form-control col-md-8 " type="text" name="descripcion" placeholder="Ingresar descripción (opcional)" >{{old('descripcion')??$planificacion->descripcion}}</textarea>
+            {!! validacion($errors,'descripcion') !!}
+              
         </div>
     </div>
-
-
 
   </form>
 </div>

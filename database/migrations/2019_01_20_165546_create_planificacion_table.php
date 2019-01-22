@@ -19,6 +19,7 @@ class CreatePlanificacionTable extends Migration
             $table->date('fechaInicio');
             $table->date('fechaFin')->nullable();
             $table->text('descripcion')->nullable();
+            $table->enum('estado',['activo','finalizado','tiempo'])->default('activo');
             $table->enum('ciclo',[1,2]);
 
         });
