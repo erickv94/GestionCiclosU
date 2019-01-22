@@ -32,10 +32,10 @@ display:inline;
               </div>    
               <form class="row" method="GET" action="{{route('locales.index')}}">
                           <div class="form-group col-sm-3">
-                <input class="form-control" type="text" placeholder="Buscar por nombre" name='nombre'>
+                <input class="form-control" type="text" placeholder="Buscar por nombre" name='nombre' value="{{request('nombre')}}">
               </div>
               <div class="form-group col-sm-3">
-                <input class="form-control" type="text" placeholder="Buscar por codigo" name="codigo">
+                <input class="form-control" type="text" placeholder="Buscar por codigo" name="codigo" value="{{request('codigo')}}">
               </div>
 
               <div class="form-group col-sm-3 ">

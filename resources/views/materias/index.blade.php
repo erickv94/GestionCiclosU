@@ -33,27 +33,27 @@ display:inline;
               </div>    
               <form class="row" method="GET" action="{{route('materias.index')}}">
                           <div class="form-group col-sm-3">
-                <input class="form-control" type="text" placeholder="Buscar por nombre" name='nombre' value="{{old('nombre')}}">
+                <input class="form-control" type="text" placeholder="Buscar por nombre" name='nombre' value="{{request('nombre')}}">
               </div>
               <div class="form-group col-sm-3">
-                <input class="form-control" type="text" placeholder="Buscar por codigo" name="codigo" value="{{old('codigo')}}">
+                <input class="form-control" type="text" placeholder="Buscar por codigo" name="codigo" value="{{request('codigo')}}">
               </div>
               <div class="form-group col-sm-3">
                 <select class="form-control" id="select" name='ciclo'>
                   <option value >Buscar por ciclo</option>
-                  <option value="Ambos">Ambos</option>
-                  <option value="Impar">Impar</option>
-                  <option value="Par">Par</option>
+                  <option value="Ambos" {{request('ciclo')=='Ambos'?'selected':''}}>Ambos</option>
+                  <option value="Impar" {{request('ciclo')=='Impar'?'selected':''}}>Impar</option>
+                  <option value="Par" {{request('ciclo')=='Par'?'selected':''}}>Par</option>
                 </select>
               </div>
               <div class="form-group col-sm-3">
                 <select class="form-control" id="select" name='nivel'>
                   <option value >Buscar por año</option>
-                  <option value="1">Primero</option>
-                  <option value="2">Segundo</option>
-                  <option value="3">Tercero</option>
-                  <option value="4">Cuarto</option>
-                  <option value="5">Quinto</option>
+                  <option value="1" {{request('nivel')=='1'?'selected':''}}>Primero</option>
+                  <option value="2" {{request('nivel')=='2'?'selected':''}}>Segundo</option>
+                  <option value="3" {{request('nivel')=='3'?'selected':''}}>Tercero</option>
+                  <option value="4" {{request('nivel')=='4'?'selected':''}}>Cuarto</option>
+                  <option value="5" {{request('nivel')=='5'?'selected':''}}>Quinto</option>
                 </select>
               </div>
               <div class="form-group col-sm-3 ">

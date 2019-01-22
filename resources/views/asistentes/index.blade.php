@@ -32,10 +32,10 @@
                 </div>    
                 <form class="row" method="GET" action="{{route('asistentes.index')}}">
                             <div class="form-group col-sm-3">
-                  <input class="form-control" type="text" placeholder="Buscar por nombre" name='name'>
+                  <input class="form-control" type="text" placeholder="Buscar por nombre" name='name' value="{{request('name')}}">
                 </div>
                 <div class="form-group col-sm-3">
-                  <input class="form-control" type="text" placeholder="Buscar por email" name="email">
+                  <input class="form-control" type="text" placeholder="Buscar por email" name="email" value="{{request('email')}}">
                 </div>
 
                 <div class="form-group col-sm-3 ">
