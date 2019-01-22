@@ -12,6 +12,6 @@ Route::group(['prefix' => 'asistentes'], function () {
     Route::get('/{id}/edit', 'AsistenteController@edit')->name('asistentes.edit')->middleware('permiso:asistentes.edit');
     Route::put('/{id}/update', 'AsistenteController@update')->name('asistentes.update')->middleware('permiso:asistentes.edit');
     Route::patch('/{id}/inhabilitar', 'AsistenteController@inhabilitar')->name('asistentes.inhabilitar')->middleware('permiso:asistentes.inhabilitar');
-    Route::delete('/destroy/{id}', 'AsistenteController@destroy')->name('asistentes.destroy')->middleware('permiso:asistentes.inhabilitar');
+    Route::delete('/destroy/{id}', 'AsistenteController@destroy')->name('asistentes.destroy')->middleware('permiso:asistentes.delete');
 
 });

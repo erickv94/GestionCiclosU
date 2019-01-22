@@ -100,8 +100,15 @@ display:inline;
               @break              
           @endswitch</td>
           <td>
+          @can('materias.show')
           <a href="{{route('materias.show',$materia->id)}}" class="btn btn-outline-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> Mostrar</a>
+          @endcan
+
+          @can('materias.edit')
           <a href="{{route('materias.edit',$materia->id)}}" class="btn btn-outline-primary btn-sm"><i class="fa fa-pencil" aria-hidden="true"></i> Editar</a>
+          @endcan
+
+          @can('materias.inhabilitar')
           <form class='accion-form' action="{{route('materias.inhabilitar',$materia->id)}}" method="POST">
           @csrf
             @method('patch')
@@ -111,12 +118,15 @@ display:inline;
               <button type="submit" class="btn btn-outline-success btn-sm"><i class="fa fa-unlock" aria-hidden="true"></i> Habilitar</button>               
             @endif
           </form>
+          @endcan
+
+          @can('materias.delete')
             <form id="delete-{{$materia->id}}" class='accion-form' action="{{ route('materias.destroy', $materia->id)}}" method="post">
               @csrf
               @method('DELETE')
               <button class="btn btn-outline-danger btn-sm" type="button" onclick="confirmar('{{$materia->nombre}}',{{$materia->id}})"><i class="fa fa-trash" aria-hidden="true"></i>  Eliminar</button>
             </form>
-
+          @endcan
           </td>
         </tr>
       @endforeach

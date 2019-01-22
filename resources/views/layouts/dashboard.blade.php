@@ -58,9 +58,12 @@
         <li><a class="app-menu__item {{isActive('docentes')}}" href="{{route('docentes.index')}}"><i class="app-menu__icon fa fa-users "></i><span class="app-menu__label">Gestión Docentes</span></a></li>
         <li><a class="app-menu__item {{isActive('materias')}}" href="{{route('materias.index')}}"><i class="app-menu__icon fa fa-book "></i><span class="app-menu__label">Gestión Materias</span></a></li>       
         <li><a class="app-menu__item {{isActive('locales')}}" href="{{route('locales.index')}}"><i class="app-menu__icon fa fa-building-o "></i><span class="app-menu__label">Gestión Locales</span></a></li>      
+        @can('asistentes.index')
         <li><a class="app-menu__item {{isActive('asistentes')}}" href="{{route('asistentes.index')}}"><i class="app-menu__icon fa fa-user-secret "></i><span class="app-menu__label">Gestión Asistentes</span></a></li>
+        @endcan
+       @can('planificacion.index')
         <li><a class="app-menu__item {{isActive('planificacion')}}" href="{{route('planificaciones.index')}}"><i class="app-menu__icon fa fa-folder "></i><span class="app-menu__label">Planificación de ciclo</span></a></li>
-
+       @endcan
       </ul>
 
 

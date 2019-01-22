@@ -49,4 +49,6 @@ class PlanificacionController extends Controller
         ]);
         return back()->with('mensaje','La planificacion fue creada con exito, no se podra agregar otra hasta que esta finalice, se puede editar y eliminar en casos extras');
     }
+
+    
 }

@@ -12,6 +12,6 @@ Route::group(['prefix' => 'docentes'], function () {
     Route::get('/{id}/edit', 'DocenteController@edit')->name('docentes.edit')->middleware('permiso:docentes.edit');
     Route::put('/{id}/update', 'DocenteController@update')->name('docentes.update')->middleware('permiso:docentes.edit');
     Route::patch('/{id}/inhabilitar', 'DocenteController@inhabilitar')->name('docentes.inhabilitar')->middleware('permiso:docentes.inhabilitar');
-    Route::delete('/destroy/{id}', 'DocenteController@destroy')->name('docentes.destroy')->middleware('permiso:docentes.inhabilitar');
+    Route::delete('/destroy/{id}', 'DocenteController@destroy')->name('docentes.destroy')->middleware('permiso:docentes.delete');
 
 });

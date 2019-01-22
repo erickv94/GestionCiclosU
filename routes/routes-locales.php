@@ -13,6 +13,6 @@ Route::group(['prefix' => 'locales'], function () {
     Route::get('/{id}/edit', 'LocalController@edit')->name('locales.edit')->middleware('permiso:locales.edit');
     Route::put('/{id}/update', 'LocalController@update')->name('locales.update')->middleware('permiso:locales.edit');
     Route::patch('/{id}/inhabilitar', 'LocalController@inhabilitar')->name('locales.inhabilitar')->middleware('permiso:locales.inhabilitar');
-    Route::delete('/destroy/{id}', 'LocalController@destroy')->name('locales.destroy')->middleware('permiso:locales.inhabilitar');
+    Route::delete('/destroy/{id}', 'LocalController@destroy')->name('locales.destroy')->middleware('permiso:locales.delete');
 
 });

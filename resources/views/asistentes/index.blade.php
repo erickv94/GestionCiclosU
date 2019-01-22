@@ -59,25 +59,32 @@
             <td>{{$asistente->name}}</td>
             <td>{{$asistente->email}}</td>
             <td>
-            <a href="{{route('asistentes.show',$asistente->id)}}" class="btn btn-outline-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> Mostrar</a>
-            <a href="{{route('asistentes.edit',$asistente->id)}}" class="btn btn-outline-primary btn-sm"><i class="fa fa-pencil" aria-hidden="true"></i> Editar</a>
-            <form class='accion-form' action="{{route('asistentes.inhabilitar',$asistente->id)}}" method="POST">
-            @csrf
+            @can('asistentes.show')
+              <a href="{{route('asistentes.show',$asistente->id)}}" class="btn btn-outline-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> Mostrar</a>
+            @endcan
+            @can('asistentes.edit')
+              <a href="{{route('asistentes.edit',$asistente->id)}}" class="btn btn-outline-primary btn-sm"><i class="fa fa-pencil" aria-hidden="true"></i> Editar</a>
+            @endcan
+            @can('asistentes.inhabilitar')
+              <form class='accion-form' action="{{route('asistentes.inhabilitar',$asistente->id)}}" method="POST">
+              @csrf
               @method('patch')
               @if ($asistente->habilitado)
                 <button type="submit" class="btn btn-outline-warning btn-sm"><i class="fa fa-lock" aria-hidden="true"></i> Inhabilitar</button>  
               @else
                 <button type="submit" class="btn btn-outline-success btn-sm"><i class="fa fa-unlock" aria-hidden="true"></i> Habilitar</button>  
-               
+                
               @endif
               </form>
-
+            @endcan
+            
+            @can('asistentes.delete')
               <form id="delete-{{$asistente->id}}" class='accion-form' action="{{ route('asistentes.destroy', $asistente->id)}}" method="post">
                 @csrf
                 @method('DELETE')
                 <button class="btn btn-outline-danger btn-sm" type="button" onclick="confirmar('{{$asistente->name}}',{{$asistente->id}})"><i class="fa fa-trash" aria-hidden="true"></i>  Eliminar</button>
               </form>
-  
+            @endcan
             </td>
           </tr>
         @endforeach

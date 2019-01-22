@@ -48,7 +48,11 @@ class PermisoSeeder extends Seeder
             'slug'=>'docentes.inhabilitar',
             'description'=>'Inhabilitar docentes en el sistema',
         ]);
-        
+        Permission::create([
+            'name'=>'eliminar docentes',
+            'slug'=>'docentes.delete',
+            'description'=>'Eliminar docentes en el sistema',
+        ]);
               //modulo materias
             Permission::create([
             'name'=>'Listar materias',
@@ -77,7 +81,11 @@ class PermisoSeeder extends Seeder
             'description'=>'Inhabilitar materias en el sistema',
         ]);   
             
-            
+        Permission::create([
+            'name'=>'Eliminar materia',
+            'slug'=>'materias.delete',
+            'description'=>'Eliminar materias en el sistema',
+        ]);   
 
                 //modulo locales
         Permission::create([
@@ -106,6 +114,51 @@ class PermisoSeeder extends Seeder
             'slug'=>'locales.inhabilitar',
             'description'=>'Inhabilitar locales del sistema',
         ]);   
+        Permission::create([
+            'name'=>'Eliminar Locales',
+            'slug'=>'locales.delete',
+            'description'=>'Eliminar locales del sistema',
+        ]);   
+        //permisos modulo asistente
+    
+        Permission::create([
+            'name'=>'Listar asistentes',
+            'slug'=>'asistentes.index',
+            'description'=>'Listar y navegar en asistentes del sistema',
+        ]);
 
+        Permission::create([
+            'name'=>'Crear asistentes',
+            'slug'=>'asistentes.create',
+            'description'=>'Crear asistentes en el sistema',
+        ]);
+        Permission::create([
+            'name'=>'Mostrar detalles de asistentes',
+            'slug'=>'asistentes.show',
+            'description'=>'Mostrar datos de asistentes en el sistema',
+        ]);
+        Permission::create([
+            'name'=>'Actualizar asistentes',
+            'slug'=>'asistentes.edit',
+            'description'=>'Actualizar asistentes del sistema',
+        ]);
+        Permission::create([
+            'name'=>'Inhabilitar asistentes',
+            'slug'=>'asistentes.inhabilitar',
+            'description'=>'Inhabilitar asistentes del sistema',
+        ]);   
+        Permission::create([
+            'name'=>'Eliminar asistentes',
+            'slug'=>'asistentes.delete',
+            'description'=>'Eliminar asistentes del sistema',
+        ]);   
+
+
+        //planificacion de ciclo
+        Permission::create([
+            'name'=>'Planificacion index',
+            'slug'=>'planificacion.index',
+            'description'=>'planificacion.index',
+        ]);   
     }
 }

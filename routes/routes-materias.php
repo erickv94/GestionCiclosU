@@ -11,6 +11,6 @@ Route::group(['prefix' => 'materias'], function () {
    Route::get('/{id}/edit', 'MateriaController@edit')->name('materias.edit')->middleware('permiso:materias.edit');
    Route::put('/{id}/update', 'MateriaController@update')->name('materias.update')->middleware('permiso:materias.edit');
    Route::patch('/{id}/inhabilitar', 'MateriaController@inhabilitar')->name('materias.inhabilitar')->middleware('permiso:materias.inhabilitar');
-   Route::delete('/destroy/{id}', 'MateriaController@destroy')->name('materias.destroy')->middleware('permiso:materias.inhabilitar');
+   Route::delete('/destroy/{id}', 'MateriaController@destroy')->name('materias.destroy')->middleware('permiso:materias.delete');
 
 });

@@ -77,8 +77,15 @@
             <td>{{$docente->user->email}}</td>
             <td>{!!($docente->esCoordinador) ?'<i class="fa fa-check text-success" aria-hidden="true"></i>':'<i class="fa fa-close text-danger" aria-hidden="true"></i>' !!}</td>
             <td>
+            @can('docentes.show')  
             <a href="{{route('docentes.show',$docente->id)}}" class="btn btn-outline-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> Mostrar</a>
+            @endcan
+
+            @can('docentes.edit')
             <a href="{{route('docentes.edit',$docente->id)}}" class="btn btn-outline-primary btn-sm"><i class="fa fa-pencil" aria-hidden="true"></i> Editar</a>
+            @endcan
+
+            @can('docentes.inhabilitar')
             <form class='accion-form' action="{{route('docentes.inhabilitar',$docente->id)}}" method="POST">
             @csrf
               @method('patch')
@@ -86,16 +93,17 @@
                 <button type="submit" class="btn btn-outline-warning btn-sm"><i class="fa fa-lock" aria-hidden="true"></i> Inhabilitar</button>  
               @else
                 <button type="submit" class="btn btn-outline-success btn-sm"><i class="fa fa-unlock" aria-hidden="true"></i> Habilitar</button>  
-               
               @endif
               </form>
+            @endcan
 
+            @can('docentes.delete')
               <form id="delete-{{$docente->id}}" class='accion-form' action="{{ route('docentes.destroy', $docente->id)}}" method="post">
                 @csrf
                 @method('DELETE')
                 <button class="btn btn-outline-danger btn-sm" type="button" onclick="confirmar('{{$docente->user->name}}',{{$docente->id}})"><i class="fa fa-trash" aria-hidden="true"></i>  Eliminar</button>
               </form>
-  
+            @endcan
             </td>
           </tr>
         @endforeach
