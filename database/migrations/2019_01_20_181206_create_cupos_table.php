@@ -15,13 +15,14 @@ class CreateCuposTable extends Migration
     {
         Schema::create('cupos', function (Blueprint $table) {
             $table->increments('id');
+            $table->enum('dia',['Lunes','Martes','Miercoles','Jueves','Viernes']);
             $table->time('horaInicio');
             $table->time('horaFin');
-            $table->unsignedInteger('materia_id');
+            $table->unsignedInteger('grupo_id');
             $table->unsignedInteger('local_id');
             $table->unsignedInteger('horario_id');
 
-            $table->foreign('materia_id')->references('id')->on('materias')->onDelete('cascade');
+            $table->foreign('grupo_id')->references('id')->on('grupos')->onDelete('cascade');
             $table->foreign('local_id')->references('id')->on('locales')->onDelete('cascade');
             $table->foreign('horario_id')->references('id')->on('horarios')->onDelete('cascade');
         });

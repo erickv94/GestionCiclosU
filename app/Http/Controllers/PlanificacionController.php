@@ -29,32 +29,32 @@ class PlanificacionController extends Controller
 
     public function store(PlanificacionRequest $request){
         $planificacion=Planificacion::create($request->all());
-        
+        //crea todo los horarios necesarios   
         $planificacion->horarios()->saveMany([
             new Horario([
-                'referido'=>'Horario de primer año -'.($request->ciclo==1?'Ciclo I':'Ciclo II'),
+                'referido'=>'Primer año -'.($request->ciclo==1?'ciclo I':'ciclo II'),
                 'nivel'=>1,
-                'descripcion'=>'Horario de planificación de primer año'
+                'descripcion'=>'Horario de planificación de primer año facultad de Quimica y Farmacia'
             ]),     
            new Horario([
-                'referido'=>'Horario de segundo año -'.($request->ciclo==1?'Ciclo I':'Ciclo II'),
+                'referido'=>'Segundo año -'.($request->ciclo==1?'ciclo I':'ciclo II'),
                 'nivel'=>2,
-                'descripcion'=>'Horario de planificación de segundo año'
+                'descripcion'=>'Horario de planificación de segundo año facultad de Quimica y Farmacia'
             ]),
             new Horario([
-                'referido'=>'Horario de tercer año -'.($request->ciclo==1?'Ciclo I':'Ciclo II'),
+                'referido'=>'Tercer año -'.($request->ciclo==1?'ciclo I':'ciclo II'),
                 'nivel'=>3,
-                'descripcion'=>'Horario de planificación de tercer año'
+                'descripcion'=>'Horario de planificación de tercer año facultad de Quimica y Farmacia'
             ]),
             new Horario([
-                'referido'=>'Horario de cuarto año -'.($request->ciclo==1?'Ciclo I':'Ciclo II'),
+                'referido'=>'Cuarto año -'.($request->ciclo==1?'ciclo I':'ciclo II'),
                 'nivel'=>4,
-                'descripcion'=>'Horario de planificación de cuarto año'
+                'descripcion'=>'Horario de planificación de cuarto año facultad de Quimica y Farmacia'
             ]),
             new Horario([
-                'referido'=>'Horario de quinto año -'.($request->ciclo==1?'Ciclo I':'Ciclo II'),
+                'referido'=>'Quinto año -'.($request->ciclo==1?'ciclo I':'ciclo II'),
                 'nivel'=>5,
-                'descripcion'=>'Horario de planificación de quinto año'
+                'descripcion'=>'Horario de planificación de quinto año facultad de Quimica y Farmacia'
             ]),
         ]);
         return redirect()->route('planificaciones.index')->with('mensaje','La planificacion fue creada con exito, no se podra agregar otra hasta que esta finalice, se puede editar y eliminar en casos extras');

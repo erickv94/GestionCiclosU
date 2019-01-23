@@ -16,6 +16,7 @@ class periodoActivo
      */
     public function handle($request, Closure $next)
     {
+        //evitan crear planificaciones cuando estan activas
         $planificacionesActiva=Planificacion::where('estado','activo')->count();
         if($planificacionesActiva>0)
         {

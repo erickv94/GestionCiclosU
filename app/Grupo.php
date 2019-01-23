@@ -12,4 +12,7 @@ class Grupo extends Model
     public function materia(){
         $this->belongsTo('App\Materia');
     }   
+    public function cupos(){
+        return $this->hasMany('App\Cupo');
+    }
 }

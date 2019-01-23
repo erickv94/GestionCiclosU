@@ -16,6 +16,10 @@ class beforeIndexPlanificacion
      */
     public function handle($request, Closure $next)
     {
+
+        //se ejecuta antes de la entrada al menu de planificacion, 
+        //realiza  la desactivacion de tiempo cuando vence en el sistema
+    
         $planificacionHoy=Planificacion::where('fechaFin','<',now())
         ->where('estado','activo')->get()->first();
         if($planificacionHoy)

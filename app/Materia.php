@@ -15,9 +15,7 @@ class Materia extends Model
     public function grupos(){
         return $this->hasMany('App\Grupo');
     }
-    public function cupos(){
-        return $this->hasMany('App\Cupo');
-    }
+
 
     public function docente(){
         return $this->belongsTo('App\Docente');
